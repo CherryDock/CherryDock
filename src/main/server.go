@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Println(err)
 	}
-	config := configuration.LoadConfig(pwd + "config.yml")
+	config := configuration.LoadConfig(pwd + "/config.yml")
 	server := config.Server
 	router := endpoints.Routing()
 
