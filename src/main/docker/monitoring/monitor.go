@@ -1,9 +1,9 @@
 package monitoring
 
 import (
+	json_utils "github.com/Fszta/DockerMonitoring/src/main/jsonutils"
 	"log"
 	"sync"
-	json_utils "test/src/main/jsonutils"
 	"time"
 )
 

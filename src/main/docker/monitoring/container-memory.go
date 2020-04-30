@@ -2,9 +2,9 @@ package monitoring
 
 import (
 	"context"
+	jsonutils "github.com/Fszta/DockerMonitoring/src/main/jsonutils"
 	"github.com/docker/docker/client"
 	"io/ioutil"
-	jsonutils "test/src/main/jsonutils"
 )
 
 type MemoryStats struct {
