@@ -1,8 +1,8 @@
 package endpoints
 
 import (
-	"github.com/Fszta/DockerMonitoring/src/main/docker/actions"
-	"github.com/Fszta/DockerMonitoring/src/main/docker/monitoring"
+	"github.com/Fszta/DockerMonitoring/docker/actions"
+	"github.com/Fszta/DockerMonitoring/docker/monitoring"
 	"github.com/gorilla/mux"
 	"net/http"
 )

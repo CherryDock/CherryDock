@@ -2,7 +2,7 @@ package monitoring
 
 import (
 	"context"
-	"github.com/Fszta/DockerMonitoring/src/main/jsonutils"
+	"github.com/Fszta/DockerMonitoring/jsonutils"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 )

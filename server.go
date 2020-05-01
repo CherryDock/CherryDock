@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/Fszta/DockerMonitoring/src/main/configuration"
-	"github.com/Fszta/DockerMonitoring/src/main/endpoints"
+	"github.com/Fszta/DockerMonitoring/configuration"
+	"github.com/Fszta/DockerMonitoring/endpoints"
 	"log"
 	"net/http"
 	"os"
