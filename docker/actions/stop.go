@@ -6,10 +6,16 @@ import (
 	"log"
 )
 
-func StopContainer(ctx context.Context, cli *client.Client, containerId string) {
-	log.Printf("Stop container %s", containerId)
+func StopContainer(ctx context.Context, cli *client.Client, containerId string) bool {
+	var succeed bool
+
+	log.Printf("Try to stop container %s", containerId)
 	if err := cli.ContainerStop(ctx, containerId, nil); err != nil {
-		panic(err)
+		log.Printf("Fail to stop container %s : %s", containerId, err)
+		succeed = false
+	} else {
+		log.Printf("Succesfully stop container %s", containerId)
+		succeed = true
 	}
-	log.Printf("Succesfully stop container %s", containerId)
+	return succeed
 }

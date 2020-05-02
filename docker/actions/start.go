@@ -7,19 +7,17 @@ import (
 	"log"
 )
 
-func StartContainer(ctx context.Context, cli *client.Client, containerId string) {
+func StartContainer(ctx context.Context, cli *client.Client, containerId string) bool {
+	var succeed bool
 
-	log.Printf("Start container %s", containerId)
-
+	log.Printf("Try to start container %s", containerId)
 	if err := cli.ContainerStart(ctx, containerId, types.ContainerStartOptions{}); err != nil {
-		panic(err)
+		log.Printf("Fail to start container %s : %s",containerId,err)
+		succeed = false
+	} else {
+		log.Printf("Successfully start container %s", containerId)
+		succeed = true
 	}
-
-	out, err := cli.ContainerLogs(ctx, containerId, types.ContainerLogsOptions{ShowStdout: true})
-	if err != nil {
-		panic(err)
-	}
-
-	log.Printf("Successfully tart container %s", containerId)
-	log.Println(out)
+	return succeed
 }
+
