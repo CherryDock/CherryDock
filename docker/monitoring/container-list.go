@@ -5,6 +5,7 @@ import (
 	"github.com/Fszta/DockerMonitoring/jsonutils"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
+	"log"
 )
 
 type containerInfo struct {
@@ -20,7 +21,7 @@ type containerInfo struct {
 func GetContainersInfo(allContainers bool) []byte{
 	cli, err := client.NewEnvClient()
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{All: allContainers})
 
@@ -40,13 +41,13 @@ func GetContainersInfo(allContainers bool) []byte{
 	return jsonutils.FormatToJson(containersInfo)
 }
 
-func runningContainersId() []string{
+func ContainersId(all bool) []string{
 	cli, err := client.NewEnvClient()
 	if err != nil {
 		panic(err)
 	}
 
-	runningContainers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{All: false})
+	runningContainers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{All: all})
 
 	var containersId []string
 	for _, container := range runningContainers {
