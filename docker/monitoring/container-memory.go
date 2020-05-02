@@ -5,6 +5,7 @@ import (
 	jsonutils "github.com/Fszta/DockerMonitoring/jsonutils"
 	"github.com/docker/docker/client"
 	"io/ioutil"
+	"log"
 )
 
 type MemoryStats struct {
@@ -33,6 +34,7 @@ func getContainerMemory(containerId string) ContainerMemory {
 	// Extract memory field
 	memoryData := dockerStats["memory_stats"]
 	memoryStats := extractMemoryStats(memoryData)
+	log.Println(ContainerMemory{containerId,memoryStats})
 
 	return 	ContainerMemory{containerId,memoryStats}
 }
@@ -44,12 +46,12 @@ func extractMemoryStats(memoryField interface{}) MemoryStats {
 	usage := memoryField.(map[string]interface{})["usage"].(float64)
 	cache := memoryField.(map[string]interface{})["stats"].(map[string]interface{})["cache"].(float64)
 
-	var memoryStats MemoryStats = computeStats(limit,usage,cache)
+	var memoryStats MemoryStats = ComputeStats(limit,usage,cache)
 
 	return memoryStats
 }
 
-func computeStats(limit float64, usage float64, cache float64) MemoryStats {
+func ComputeStats(limit float64, usage float64, cache float64) MemoryStats {
 	memoryUsage := usage - cache
 	memoryUtilizationPercent := memoryUsage/limit * 100
 	memoryStats := MemoryStats{
@@ -60,3 +62,4 @@ func computeStats(limit float64, usage float64, cache float64) MemoryStats {
 
 	return memoryStats
 }
+
