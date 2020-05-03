@@ -15,6 +15,7 @@ type SingleActionTest struct {
 }
 
 func TestStart(t *testing.T) {
+	// Test start single container
 	var url = "http://0.0.0.0:8001/api/action/start?id="
 	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
 	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
@@ -42,7 +43,7 @@ func TestStart(t *testing.T) {
 }
 
 func TestStop(t *testing.T) {
-
+	// Test stop single container
 	var url = "http://0.0.0.0:8001/api/action/stop?id="
 	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
 	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
