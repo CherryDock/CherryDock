@@ -12,7 +12,7 @@ type action func(ctx context.Context, cli *client.Client, containerId string) bo
 
 type ActionState struct {
 	ContainerId string
-	Succeed bool
+	Succeed     bool
 }
 
 func ActionSingleContainer(singleAction action, containerdId string) bool {
@@ -28,7 +28,7 @@ func ActionSingleContainer(singleAction action, containerdId string) bool {
 	return succeed
 }
 
-func ActionOnAllContainer(singleAction action) []byte {
+func ActionOnAllContainer(singleAction action, all bool) []byte {
 	ctx := context.Background()
 	cli, err := client.NewEnvClient()
 
@@ -38,10 +38,10 @@ func ActionOnAllContainer(singleAction action) []byte {
 
 	var states []ActionState
 
-	allContainers := monitoring.ContainersId(true)
-	for _ , id := range allContainers {
+	allContainers := monitoring.ContainersId(all)
+	for _, id := range allContainers {
 		succeed := singleAction(ctx, cli, id)
-		states  = append(states,ActionState{id,succeed})
+		states = append(states, ActionState{id, succeed})
 	}
 
 	return jsonutils.FormatToJson(states)
