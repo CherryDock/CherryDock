@@ -9,6 +9,7 @@ import (
 
 func Routing() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
+
 	router.HandleFunc("/api/monitor/memory-stats", getMemoryJson)
 	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
 	router.HandleFunc("/api/monitor/logs", getLogs)
@@ -16,6 +17,7 @@ func Routing() *mux.Router {
 	router.HandleFunc("/api/action/start-all", startAll)
 	router.HandleFunc("/api/action/start", StartSingle)
 	router.HandleFunc("/api/action/stop", StopSingle)
+	router.HandleFunc("/api/action/restart", RestartSingle)
 
 	return router
 }
@@ -46,6 +48,21 @@ func StopSingle(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		http.Error(w, "Fail to stop container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func RestartSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.RestartContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to restart container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to restart container, id parameter is missing", http.StatusBadRequest)
 	}
 }
 
