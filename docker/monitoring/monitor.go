@@ -1,9 +1,9 @@
 package monitoring
 
 import (
+	json_utils "github.com/Fszta/DockerMonitoring/jsonutils"
 	"log"
 	"sync"
-	json_utils "test/src/main/jsonutils"
 	"time"
 )
 
@@ -17,13 +17,12 @@ func memoryMonitoring() ([]ContainerMemory, int,float64){
 	log.Println("Monitor running containers memory...")
 
 	// Extract running containers id
-	runningContainers := runningContainersId()
+	runningContainers := ContainersId(false)
 
 	// Extract memory statistics
 	var containersMemory []ContainerMemory
-	nbContainers := len(runningContainers)
+	var nbContainers = len(runningContainers)
 	var globalMemoryUsage = 0.0
-
 	var wg sync.WaitGroup
 	wg.Add(nbContainers)
 

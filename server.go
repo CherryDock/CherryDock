@@ -1,11 +1,11 @@
 package main
 
 import (
+	"github.com/Fszta/DockerMonitoring/configuration"
+	"github.com/Fszta/DockerMonitoring/endpoints"
 	"log"
 	"net/http"
 	"os"
-	"test/src/main/configuration"
-	"test/src/main/endpoints"
 )
 
 func main() {
