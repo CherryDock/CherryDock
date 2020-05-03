@@ -4,17 +4,61 @@ import (
 	"github.com/Fszta/DockerMonitoring/docker/actions"
 	"github.com/Fszta/DockerMonitoring/docker/monitoring"
 	"github.com/gorilla/mux"
-	"log"
 	"net/http"
 )
 
 func Routing() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/api/memory-stats", getMemoryJson)
-	router.HandleFunc("/api/containers-info", getContainersInfoJson)
-	router.HandleFunc("/api/action/", handleAction)
+	router.HandleFunc("/api/monitor/memory-stats", getMemoryJson)
+	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
+	router.HandleFunc("/api/monitor/logs", getLogs)
+	router.HandleFunc("/api/action/stop-all", stopAll)
+	router.HandleFunc("/api/action/start-all", startAll)
+	router.HandleFunc("/api/action/start", StartSingle)
+	router.HandleFunc("/api/action/stop", StopSingle)
 
 	return router
+}
+
+func StartSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.StartContainer, id)
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to start container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to stop container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func StopSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.StopContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to stop container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to stop container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func startAll(w http.ResponseWriter, r *http.Request) {
+	states := actions.ActionOnAllContainer(actions.StartContainer, true)
+	w.Header().Set("content-type", "application/json")
+	w.Write(states)
+}
+
+func stopAll(w http.ResponseWriter, r *http.Request) {
+	states := actions.ActionOnAllContainer(actions.StopContainer, false)
+	w.Header().Set("content-type", "application/json")
+	w.Write(states)
 }
 
 func getMemoryJson(w http.ResponseWriter, r *http.Request) {
@@ -29,16 +73,9 @@ func getContainersInfoJson(w http.ResponseWriter, r *http.Request) {
 	w.Write(containersInfo)
 }
 
-func handleAction(w http.ResponseWriter, r *http.Request) {
-	/*parameters := mux.Vars(r)
-	action := parameters["action"]
-	id := parameters["id"]*/
-	action := r.FormValue("action")
-	id := r.FormValue("id")
-	// Handle single container action
-	log.Printf(action, id)
-	actions.Handle(action, id)
+func getLogs(w http.ResponseWriter, r *http.Request) {
+	containerdId := r.FormValue("id")
+	logs := monitoring.RetrieveLogs(containerdId)
 
-	w.Header().Set("content-type", "application/json")
-	w.WriteHeader(http.StatusOK)
+	w.Write(logs)
 }
