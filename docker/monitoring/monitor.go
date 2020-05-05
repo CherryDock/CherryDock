@@ -4,16 +4,15 @@ import (
 	json_utils "github.com/Fszta/DockerMonitoring/jsonutils"
 	"log"
 	"sync"
-	"time"
 )
 
 type GlobalMemoryStats struct {
 	RunningContainers int
-	GlobalUsePercent float64
-	ContainersMemory []ContainerMemory
+	GlobalUsePercent  float64
+	ContainersMemory  []ContainerMemory
 }
 
-func memoryMonitoring() ([]ContainerMemory, int,float64){
+func memoryMonitoring() ([]ContainerMemory, int, float64) {
 	log.Println("Monitor running containers memory...")
 
 	// Extract running containers id
@@ -41,7 +40,7 @@ func memoryMonitoring() ([]ContainerMemory, int,float64){
 }
 
 func GetMemoryStats() []byte {
-	memoryStats,runningContainers,globalMemoryPercent := memoryMonitoring()
+	memoryStats, runningContainers, globalMemoryPercent := memoryMonitoring()
 
 	globalStats := GlobalMemoryStats{
 		runningContainers,
@@ -49,14 +48,4 @@ func GetMemoryStats() []byte {
 		memoryStats,
 	}
 	return json_utils.FormatToJson(globalStats)
-}
-
-func scheduleMonitor(timeInterval time.Duration) {
-	ticker := time.NewTicker(timeInterval * time.Second)
-	go func() {
-		for t := range ticker.C {
-			_ = t
-			log.Println("Hello !!")
-		}
-	}()
 }
