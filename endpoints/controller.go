@@ -18,6 +18,7 @@ func Routing() *mux.Router {
 	router.HandleFunc("/api/action/start", StartSingle)
 	router.HandleFunc("/api/action/stop", StopSingle)
 	router.HandleFunc("/api/action/restart", RestartSingle)
+	router.HandleFunc("/api/action/remove", RemoveSingle)
 
 	return router
 }
@@ -63,6 +64,21 @@ func RestartSingle(w http.ResponseWriter, r *http.Request) {
 		}
 	} else {
 		http.Error(w, "Fail to restart container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func RemoveSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.RemoveContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to remove container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to remove container, id parameter is missing", http.StatusBadRequest)
 	}
 }
 
