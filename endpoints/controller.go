@@ -10,9 +10,9 @@ import (
 func Routing() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
-	router.HandleFunc("/api/monitor/memory-stats", getMemoryJson)
 	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
 	router.HandleFunc("/api/monitor/logs", getLogs)
+	router.HandleFunc("/api/monitor/stats", monitorAll)
 	router.HandleFunc("/api/action/stop-all", stopAll)
 	router.HandleFunc("/api/action/start-all", startAll)
 	router.HandleFunc("/api/action/start", StartSingle)
@@ -78,10 +78,10 @@ func stopAll(w http.ResponseWriter, r *http.Request) {
 	w.Write(states)
 }
 
-func getMemoryJson(w http.ResponseWriter, r *http.Request) {
-	memoryStats := monitoring.GetMemoryStats()
+func monitorAll(w http.ResponseWriter, r *http.Request) {
+	globalStats := monitoring.GlobalMonitoring()
 	w.Header().Set("content-type", "application/json")
-	w.Write(memoryStats)
+	w.Write(globalStats)
 }
 
 func getContainersInfoJson(w http.ResponseWriter, r *http.Request) {
