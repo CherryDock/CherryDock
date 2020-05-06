@@ -1,51 +1,111 @@
 package monitoring
 
 import (
+	"context"
+	"encoding/json"
 	json_utils "github.com/Fszta/DockerMonitoring/jsonutils"
+	"github.com/docker/docker/client"
+	"io/ioutil"
 	"log"
 	"sync"
 )
 
-type GlobalMemoryStats struct {
-	RunningContainers int
-	GlobalUsePercent  float64
-	ContainersMemory  []ContainerMemory
+func getStats(containerId string) ContainerStats {
+	cli, err := client.NewEnvClient()
+
+	if err != nil {
+		log.Println(err)
+	}
+
+	// Retrieve all statistics
+	containerStats, err := cli.ContainerStats(context.Background(), containerId, false)
+	containerStatsBody, err := ioutil.ReadAll(containerStats.Body)
+
+	// Parse json to struct
+	stats := DockerStats{}
+	json.Unmarshal(containerStatsBody, &stats)
+
+	cpuInfo := getCpuInfo(stats)
+	memoryInfo := getMemoryInfo(stats)
+
+	stt := ContainerStats{cpuInfo, memoryInfo}
+
+	return stt
 }
 
-func memoryMonitoring() ([]ContainerMemory, int, float64) {
-	log.Println("Monitor running containers memory...")
-
+func GlobalMonitoring() []byte {
 	// Extract running containers id
 	runningContainers := ContainersId(false)
 
-	// Extract memory statistics
-	var containersMemory []ContainerMemory
-	var nbContainers = len(runningContainers)
+	var containerInfo []Container
+	var nbRunningContainers = len(runningContainers)
 	var globalMemoryUsage = 0.0
-	var wg sync.WaitGroup
-	wg.Add(nbContainers)
+	var globalCpuUsage = 0.0
+	var memoryLimit float64
+	var nbCpu int
 
-	for i := 0; i < nbContainers; i++ {
+	var wg sync.WaitGroup
+	wg.Add(nbRunningContainers)
+
+	// Retrieve container stat concurrently
+	for i := 0; i < nbRunningContainers; i++ {
 		go func(i int) {
 			defer wg.Done()
 			containerId := runningContainers[i]
-			memory := getContainerMemory(containerId)
-			globalMemoryUsage += memory.Memory.UtilizationPercent
-			containersMemory = append(containersMemory, memory)
+			stats := getStats(containerId)
+
+			// Extract memory info
+			memoryLimit = stats.MemoryInfo.Limit
+			memoryPercent := stats.MemoryInfo.UtilizationPercent
+			globalMemoryUsage += memoryPercent
+
+			// Extract cpu info
+			nbCpu = stats.CpuInfo.NbCpu
+			cpuPercent := stats.CpuInfo.CpuPercent
+			globalCpuUsage += cpuPercent
+
+			containerInfo = append(containerInfo,
+				Container{
+					containerId,
+					Info{
+						cpuPercent,
+						memoryPercent}})
 		}(i)
 	}
 	wg.Wait()
 
-	return containersMemory, nbContainers, globalMemoryUsage
+	globalStats := GlobalStats{
+		nbRunningContainers,
+		nbCpu,
+		memoryLimit,
+		globalMemoryUsage,
+		globalCpuUsage,
+		containerInfo,
+	}
+
+	return json_utils.FormatToJson(globalStats)
 }
 
-func GetMemoryStats() []byte {
-	memoryStats, runningContainers, globalMemoryPercent := memoryMonitoring()
+type ContainerStats struct {
+	CpuInfo    CpuInfo
+	MemoryInfo MemoryInfo
+}
 
-	globalStats := GlobalMemoryStats{
-		runningContainers,
-		globalMemoryPercent,
-		memoryStats,
-	}
-	return json_utils.FormatToJson(globalStats)
+type Info struct {
+	CpuPercent    float64
+	MemoryPercent float64
+}
+
+type Container struct {
+	Id   string
+	Info Info
+}
+
+type GlobalStats struct {
+	RunningContainers int
+	NbCpu             int
+	MemoryLimit       float64
+	MemoryUsage       float64
+	CpuUsage          float64
+	Containers        []Container
 }
