@@ -2,11 +2,16 @@ FROM golang:latest
 
 LABEL maintainer="Fszta <antoinefer@hotmail.com>"
 
-COPY go.mod go.sum ./
+WORKDIR /app/docker-api
+
+COPY go.mod .
+COPY go.sum .
+
 RUN go mod download
+
 COPY . .
 
-RUN go build -o main .
+RUN go build -o ./out/docker-api .
 EXPOSE 8001
 
-CMD ["./main"]
+CMD ["./out/docker-api"]
