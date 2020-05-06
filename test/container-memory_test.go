@@ -3,10 +3,10 @@ package test
 import "testing"
 import "github.com/Fszta/DockerMonitoring/docker/monitoring"
 
-func TestComputeStats(t *testing.T) {
+func TestComputeMemory(t *testing.T) {
 
-	memoryStats := monitoring.ComputeStats(4.0, 2.0, 1.0)
-	expected := monitoring.MemoryStats{
+	memoryStats := monitoring.ComputeMemory(4.0, 2.0, 1.0)
+	expected := monitoring.MemoryInfo{
 		1,
 		4,
 		25.0,
@@ -15,8 +15,8 @@ func TestComputeStats(t *testing.T) {
 		t.Errorf("Memory stats should be %v", expected)
 	}
 
-	memoryStats = monitoring.ComputeStats(1.0, 0, 0)
-	expected = monitoring.MemoryStats{
+	memoryStats = monitoring.ComputeMemory(1.0, 0, 0)
+	expected = monitoring.MemoryInfo{
 		0,
 		1,
 		0,
