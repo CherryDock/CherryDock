@@ -95,3 +95,29 @@ func TestRestart(t *testing.T) {
 		res.Body.Close()
 	}
 }
+
+func TestLogs(t *testing.T) {
+	// Test restart single container
+	var url = "http://0.0.0.0:8001/api/monitor/logs?id="
+	logsWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
+	logsWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
+
+	testActions := []SingleActionTest{logsWithEmptyId, logsWithUnknowId}
+
+	for _, test := range testActions {
+		req, err := http.NewRequest(test.Method, test.Url+test.Id, nil)
+
+		if err != nil {
+			t.Fatalf("could not create request %s", err)
+		}
+
+		recorder := httptest.NewRecorder()
+		endpoints.GetLogs(recorder, req)
+
+		res := recorder.Result()
+
+		if res.StatusCode != test.ExpectedStatus {
+			t.Fatalf("Fail, expected status is %v", test.ExpectedStatus)
+		}
+	}
+}
