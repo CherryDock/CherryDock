@@ -96,7 +96,7 @@ func TestRestart(t *testing.T) {
 	}
 }
 
-func TestLogs(t *testing.T) {
+func TestGetLogs(t *testing.T) {
 	// Test restart single container
 	var url = "http://0.0.0.0:8001/api/monitor/logs?id="
 	logsWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
