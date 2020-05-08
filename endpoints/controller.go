@@ -11,7 +11,7 @@ func Routing() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
-	router.HandleFunc("/api/monitor/logs", getLogs)
+	router.HandleFunc("/api/monitor/logs", GetLogs)
 	router.HandleFunc("/api/monitor/stats", monitorAll)
 	router.HandleFunc("/api/action/stop-all", stopAll)
 	router.HandleFunc("/api/action/start-all", startAll)
@@ -106,9 +106,18 @@ func getContainersInfoJson(w http.ResponseWriter, r *http.Request) {
 	w.Write(containersInfo)
 }
 
-func getLogs(w http.ResponseWriter, r *http.Request) {
+func GetLogs(w http.ResponseWriter, r *http.Request) {
 	containerdId := r.FormValue("id")
-	logs := monitoring.RetrieveLogs(containerdId)
+	w.Header().Set("content-type", "application/json")
 
-	w.Write(logs)
+	if containerdId == "" {
+		http.Error(w, "Fail to retrieve logs, id parameter is missing", http.StatusBadRequest)
+	} else {
+		logs, succeed := monitoring.RetrieveLogs(containerdId)
+		if succeed == false {
+			http.Error(w, "Fail to retrieve container logs, id not exists", http.StatusNotFound)
+		} else {
+			w.Write(logs)
+		}
+	}
 }
