@@ -31,7 +31,7 @@ jobs:
         fi
 
     - name: Build
-      run:
+      run: |
         cd api
         go build -v
 
