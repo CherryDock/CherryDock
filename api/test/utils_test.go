@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/Fszta/DockerMonitoring/jsonutils"
+	"github.com/CherryDock/CherryDock/jsonutils"
 	"testing"
 )
 

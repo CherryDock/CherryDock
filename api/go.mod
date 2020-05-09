@@ -1,4 +1,5 @@
-module github.com/Fszta/DockerMonitoring
+//module github.com/Fszta/DockerMonitoring
+module github.com/CherryDock/CherryDock
 
 go 1.13
 

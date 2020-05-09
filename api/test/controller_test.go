@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/Fszta/DockerMonitoring/endpoints"
+	"github.com/CherryDock/CherryDock/endpoints"
 	"net/http"
 	"net/http/httptest"
 	"testing"

@@ -3,7 +3,7 @@ package monitoring
 import (
 	"context"
 	"encoding/json"
-	json_utils "github.com/Fszta/DockerMonitoring/jsonutils"
+	json_utils "github.com/CherryDock/CherryDock/jsonutils"
 	"github.com/docker/docker/client"
 	"io/ioutil"
 	"log"
