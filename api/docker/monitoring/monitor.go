@@ -56,9 +56,9 @@ func GlobalMonitoring() []byte {
 			stats := getStats(containerId)
 
 			// Extract memory info
-			memoryLimit = byteConversion(stats.MemoryInfo.Limit)
+			memoryLimit, _ = byteConversion(stats.MemoryInfo.Limit)
 			memoryPercent := stats.MemoryInfo.UtilizationPercent
-			memory := byteConversion(stats.MemoryInfo.MemoryUsage)
+			memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
 			globalMemoryUsage += memoryPercent
 
 			// Extract cpu info
@@ -72,7 +72,7 @@ func GlobalMonitoring() []byte {
 					Info{
 						cpuPercent,
 						memoryPercent,
-						memory,
+						Memory{memoryValue, memoryUnit},
 					}})
 		}(i)
 	}
@@ -98,7 +98,12 @@ type ContainerStats struct {
 type Info struct {
 	CpuPercent    float64
 	MemoryPercent float64
-	Memory        float64
+	Memory        Memory
+}
+
+type Memory struct {
+	Value float64
+	Unit  string
 }
 
 type Container struct {
