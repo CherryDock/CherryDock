@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/Fszta/DockerMonitoring/configuration"
-	"github.com/Fszta/DockerMonitoring/endpoints"
+	"github.com/CherryDock/CherryDock/configuration"
+	"github.com/CherryDock/CherryDock/endpoints"
 	"log"
 	"net/http"
 	"os"
