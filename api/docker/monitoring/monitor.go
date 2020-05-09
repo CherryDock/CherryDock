@@ -42,6 +42,7 @@ func GlobalMonitoring() []byte {
 	var globalMemoryUsage = 0.0
 	var globalCpuUsage = 0.0
 	var memoryLimit float64
+
 	var nbCpu int
 
 	var wg sync.WaitGroup
@@ -55,8 +56,9 @@ func GlobalMonitoring() []byte {
 			stats := getStats(containerId)
 
 			// Extract memory info
-			memoryLimit = stats.MemoryInfo.Limit
+			memoryLimit = byteConversion(stats.MemoryInfo.Limit)
 			memoryPercent := stats.MemoryInfo.UtilizationPercent
+			memory := byteConversion(stats.MemoryInfo.MemoryUsage)
 			globalMemoryUsage += memoryPercent
 
 			// Extract cpu info
@@ -69,7 +71,9 @@ func GlobalMonitoring() []byte {
 					containerId,
 					Info{
 						cpuPercent,
-						memoryPercent}})
+						memoryPercent,
+						memory,
+					}})
 		}(i)
 	}
 	wg.Wait()
@@ -94,6 +98,7 @@ type ContainerStats struct {
 type Info struct {
 	CpuPercent    float64
 	MemoryPercent float64
+	Memory        float64
 }
 
 type Container struct {
