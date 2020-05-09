@@ -2,8 +2,8 @@ package actions
 
 import (
 	"context"
-	"github.com/CherryDock/CherryDock/docker/monitoring"
-	"github.com/CherryDock/CherryDock/jsonutils"
+	"github.com/CherryDock/CherryDock/api/docker/monitoring"
+	"github.com/CherryDock/CherryDock/api/jsonutils"
 	"github.com/docker/docker/client"
 	"log"
 )

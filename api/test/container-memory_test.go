@@ -1,7 +1,7 @@
 package test
 
 import "testing"
-import "github.com/CherryDock/CherryDock/docker/monitoring"
+import "github.com/CherryDock/CherryDock/api/docker/monitoring"
 
 func TestComputeMemory(t *testing.T) {
 
