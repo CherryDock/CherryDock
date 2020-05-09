@@ -1,0 +1,43 @@
+$button-green: #78e38c;
+$button-red: #f2877c;
+$button-blue: #6fb2ed;
+
+.buttonsContainer {
+  .actionButton {
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 0.9;
+    }
+    .buttonLabel {
+      margin-left: 1rem;
+    }
+  }
+
+  .buttonStart {
+    background-color: $button-green;
+  }
+  .buttonStop {
+    background-color: $button-red;
+  }
+  .buttonKill {
+    background-color: $button-red;
+  }
+  .buttonRestart {
+    background-color: $button-blue;
+  }
+  .buttonPause {
+    background-color: $button-blue;
+  }
+  .buttonResume {
+    background-color: $button-blue;
+  }
+  .buttonRemove {
+    background-color: $button-red;
+  }
+}

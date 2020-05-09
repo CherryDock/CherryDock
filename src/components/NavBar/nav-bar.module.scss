@@ -1,0 +1,59 @@
+$primary-text-color: #3e423f;
+$logout-color: #c24844;
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}
+
+.currentMenu {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-left: 3%;
+  color: $primary-text-color;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .avatar {
+    width: 2em;
+    border: 1px rgba(36, 35, 35, 0.5) solid;
+    border-radius: 100px;
+  }
+  .username {
+    margin-left: 0.7rem;
+    font-weight: 700;
+    color: $primary-text-color;
+  }
+}
+
+.logout {
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  color: rgba($logout-color, .6);
+  margin-right: 3rem;
+
+  &:hover {
+    cursor: pointer;
+    color: rgba($logout-color,1);
+    transform: scale(1.05);
+  }
+
+  .icon {
+    margin-left: 1rem;
+    font-size: 1.5rem;
+  }
+  .label {
+    margin-left: .5rem;
+    font-weight: 600;
+  }
+}
