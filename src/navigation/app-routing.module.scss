@@ -1,0 +1,16 @@
+.layout {
+    display: flex;
+}
+
+.sidebar {
+    width: 15%;
+
+    @media only screen and (max-width: 1050px) {
+        width: 20%;
+    }
+
+}
+
+.appScreen {
+    flex: 1;
+}

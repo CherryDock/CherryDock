@@ -1,0 +1,12 @@
+$background-screen-color: #f2f3f5;
+$primary-text-color: #3e423f;
+
+.container {
+  background-color: $background-screen-color;
+  height: 100%;
+  padding: 1rem 2rem;
+}
+
+.screenName {
+  color: $primary-text-color;
+}
