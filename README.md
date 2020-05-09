@@ -1,1 +1,2 @@
 ![Go](https://github.com/CherryDock/CherryDock/workflows/Go/badge.svg)
+[![Maintainability](https://api.codeclimate.com/v1/badges/05f40aad1870fa973aa9/maintainability)](https://codeclimate.com/github/CherryDock/CherryDock/maintainability)
