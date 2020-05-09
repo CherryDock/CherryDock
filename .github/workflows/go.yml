@@ -36,4 +36,6 @@ jobs:
         go build -v
 
     - name: Test
-      run: go test  -v ./test 
+      run: |
+        cd api
+        go test  -v ./test
