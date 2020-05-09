@@ -2,7 +2,7 @@ package monitoring
 
 import (
 	"context"
-	jsonutils "github.com/CherryDock/CherryDock/jsonutils"
+	jsonutils "github.com/CherryDock/CherryDock/api/jsonutils"
 	"github.com/docker/docker/client"
 	"io/ioutil"
 	"log"

@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/CherryDock/CherryDock/endpoints"
+	"github.com/CherryDock/CherryDock/api/endpoints"
 	"net/http"
 	"net/http/httptest"
 	"testing"

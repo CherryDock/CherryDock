@@ -1,8 +1,8 @@
 package endpoints
 
 import (
-	"github.com/CherryDock/CherryDock/docker/actions"
-	"github.com/CherryDock/CherryDock/docker/monitoring"
+	"github.com/CherryDock/CherryDock/api/docker/actions"
+	"github.com/CherryDock/CherryDock/api/docker/monitoring"
 	"github.com/gorilla/mux"
 	"net/http"
 )

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/CherryDock/CherryDock/configuration"
-	"github.com/CherryDock/CherryDock/endpoints"
+	"github.com/CherryDock/CherryDock/api/configuration"
+	"github.com/CherryDock/CherryDock/api/endpoints"
 	"log"
 	"net/http"
 	"os"

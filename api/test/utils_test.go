@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/CherryDock/CherryDock/jsonutils"
+	"github.com/CherryDock/CherryDock/api/jsonutils"
 	"testing"
 )
 
