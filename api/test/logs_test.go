@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/Fszta/DockerMonitoring/docker/monitoring"
+	"github.com/CherryDock/CherryDock/docker/monitoring"
 	"testing"
 )
 
