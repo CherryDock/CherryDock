@@ -102,10 +102,10 @@ type ContainerStats struct {
 }
 
 type Info struct {
-	CpuPercent    float64
-	MemoryPercent float64
-	Memory        Memory
-	NetworkInfo   NetworkInfo
+	CpuUsagePercent    float64
+	MemoryUsagePercent float64
+	Memory             Memory
+	NetworkInfo        NetworkInfo
 }
 
 type Memory struct {
@@ -119,10 +119,10 @@ type Container struct {
 }
 
 type GlobalStats struct {
-	RunningContainers int
-	NbCpu             int
-	MemoryLimit       float64
-	MemoryUsage       float64
-	CpuUsage          float64
-	Containers        []Container
+	RunningContainers  int
+	NbCpu              int
+	MemoryLimit        float64
+	MemoryUsagePercent float64
+	CpuUsagePercent    float64
+	Containers         []Container
 }
