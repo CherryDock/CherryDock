@@ -36,15 +36,18 @@ func convertNetworkStat(value float64) (float64, string) {
 	var converted float64
 	var unit string
 
-	if value < math.Pow10(6) {
+	if value < math.Pow10(3) {
+		converted = value
+		unit = "b"
+	} else if value < math.Pow10(6) {
 		converted = value / math.Pow10(3)
-		unit = "Ko"
+		unit = "Kb"
 	} else if value < math.Pow10(9) && value > math.Pow10(6) {
 		converted = value / (math.Pow10(6))
-		unit = "Mo"
+		unit = "Mb"
 	} else if value > math.Pow10(9) {
 		converted = value / (math.Pow10(9))
-		unit = "Go"
+		unit = "Gb"
 	}
 	return converted, unit
 }
