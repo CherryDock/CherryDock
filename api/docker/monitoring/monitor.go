@@ -27,8 +27,9 @@ func getStats(containerId string) ContainerStats {
 
 	cpuInfo := getCpuInfo(stats)
 	memoryInfo := getMemoryInfo(stats)
+	networkInfo := networkStats(stats)
 
-	stt := ContainerStats{cpuInfo, memoryInfo}
+	stt := ContainerStats{cpuInfo, memoryInfo, networkInfo}
 
 	return stt
 }
@@ -66,13 +67,17 @@ func GlobalMonitoring() []byte {
 			cpuPercent := stats.CpuInfo.CpuPercent
 			globalCpuUsage += cpuPercent
 
+			// Network info
 			containerInfo = append(containerInfo,
 				Container{
 					containerId,
 					Info{
 						cpuPercent,
 						memoryPercent,
-						Memory{memoryValue, memoryUnit},
+						Memory{
+							memoryValue,
+							memoryUnit},
+						stats.NetworkInfo,
 					}})
 		}(i)
 	}
@@ -91,14 +96,16 @@ func GlobalMonitoring() []byte {
 }
 
 type ContainerStats struct {
-	CpuInfo    CpuInfo
-	MemoryInfo MemoryInfo
+	CpuInfo     CpuInfo
+	MemoryInfo  MemoryInfo
+	NetworkInfo NetworkInfo
 }
 
 type Info struct {
 	CpuPercent    float64
 	MemoryPercent float64
 	Memory        Memory
+	NetworkInfo   NetworkInfo
 }
 
 type Memory struct {
