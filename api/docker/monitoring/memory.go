@@ -29,3 +29,17 @@ func ComputeMemory(limit float64, usage float64, cache float64) MemoryInfo {
 
 	return memoryStats
 }
+
+func byteConversion(value float64) (float64, string) {
+	var converted float64
+	var unit string
+
+	if value > 1073741824 {
+		converted = value / float64(1073741824)
+		unit = "GiB"
+	} else {
+		converted = value / float64(1048576)
+		unit = "MiB"
+	}
+	return converted, unit
+}

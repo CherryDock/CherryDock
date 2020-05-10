@@ -27,8 +27,9 @@ func getStats(containerId string) ContainerStats {
 
 	cpuInfo := getCpuInfo(stats)
 	memoryInfo := getMemoryInfo(stats)
+	networkInfo := networkStats(stats)
 
-	stt := ContainerStats{cpuInfo, memoryInfo}
+	stt := ContainerStats{cpuInfo, memoryInfo, networkInfo}
 
 	return stt
 }
@@ -42,6 +43,8 @@ func GlobalMonitoring() []byte {
 	var globalMemoryUsage = 0.0
 	var globalCpuUsage = 0.0
 	var memoryLimit float64
+	var memoryUnit string
+
 	var nbCpu int
 
 	var wg sync.WaitGroup
@@ -55,8 +58,9 @@ func GlobalMonitoring() []byte {
 			stats := getStats(containerId)
 
 			// Extract memory info
-			memoryLimit = stats.MemoryInfo.Limit
+			memoryLimit, memoryUnit = byteConversion(stats.MemoryInfo.Limit)
 			memoryPercent := stats.MemoryInfo.UtilizationPercent
+			memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
 			globalMemoryUsage += memoryPercent
 
 			// Extract cpu info
@@ -64,12 +68,18 @@ func GlobalMonitoring() []byte {
 			cpuPercent := stats.CpuInfo.CpuPercent
 			globalCpuUsage += cpuPercent
 
+			// Network info
 			containerInfo = append(containerInfo,
 				Container{
 					containerId,
 					Info{
 						cpuPercent,
-						memoryPercent}})
+						memoryPercent,
+						Memory{
+							memoryValue,
+							memoryUnit},
+						stats.NetworkInfo,
+					}})
 		}(i)
 	}
 	wg.Wait()
@@ -77,7 +87,7 @@ func GlobalMonitoring() []byte {
 	globalStats := GlobalStats{
 		nbRunningContainers,
 		nbCpu,
-		memoryLimit,
+		Memory{memoryLimit, memoryUnit},
 		globalMemoryUsage,
 		globalCpuUsage,
 		containerInfo,
@@ -87,13 +97,21 @@ func GlobalMonitoring() []byte {
 }
 
 type ContainerStats struct {
-	CpuInfo    CpuInfo
-	MemoryInfo MemoryInfo
+	CpuInfo     CpuInfo
+	MemoryInfo  MemoryInfo
+	NetworkInfo NetworkInfo
 }
 
 type Info struct {
-	CpuPercent    float64
-	MemoryPercent float64
+	CpuUsagePercent    float64
+	MemoryUsagePercent float64
+	Memory             Memory
+	NetworkInfo        NetworkInfo
+}
+
+type Memory struct {
+	Value float64
+	Unit  string
 }
 
 type Container struct {
@@ -102,10 +120,10 @@ type Container struct {
 }
 
 type GlobalStats struct {
-	RunningContainers int
-	NbCpu             int
-	MemoryLimit       float64
-	MemoryUsage       float64
-	CpuUsage          float64
-	Containers        []Container
+	RunningContainers  int
+	NbCpu              int
+	MemoryLimit        Memory
+	MemoryUsagePercent float64
+	CpuUsagePercent    float64
+	Containers         []Container
 }
