@@ -43,6 +43,7 @@ func GlobalMonitoring() []byte {
 	var globalMemoryUsage = 0.0
 	var globalCpuUsage = 0.0
 	var memoryLimit float64
+	var memoryUnit string
 
 	var nbCpu int
 
@@ -57,7 +58,7 @@ func GlobalMonitoring() []byte {
 			stats := getStats(containerId)
 
 			// Extract memory info
-			memoryLimit, _ = byteConversion(stats.MemoryInfo.Limit)
+			memoryLimit, memoryUnit = byteConversion(stats.MemoryInfo.Limit)
 			memoryPercent := stats.MemoryInfo.UtilizationPercent
 			memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
 			globalMemoryUsage += memoryPercent
@@ -86,7 +87,7 @@ func GlobalMonitoring() []byte {
 	globalStats := GlobalStats{
 		nbRunningContainers,
 		nbCpu,
-		memoryLimit,
+		Memory{memoryLimit, memoryUnit},
 		globalMemoryUsage,
 		globalCpuUsage,
 		containerInfo,
@@ -121,7 +122,7 @@ type Container struct {
 type GlobalStats struct {
 	RunningContainers  int
 	NbCpu              int
-	MemoryLimit        float64
+	MemoryLimit        Memory
 	MemoryUsagePercent float64
 	CpuUsagePercent    float64
 	Containers         []Container
