@@ -1,7 +1,6 @@
-package test
+package endpoints
 
 import (
-	"github.com/CherryDock/CherryDock/api/endpoints"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -29,7 +28,7 @@ func TestStart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		endpoints.StartSingle(recorder, req)
+		startSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -57,7 +56,7 @@ func TestStop(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		endpoints.StopSingle(recorder, req)
+		stopSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -84,7 +83,7 @@ func TestRestart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		endpoints.RestartSingle(recorder, req)
+		restartSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -112,7 +111,7 @@ func TestGetLogs(t *testing.T) {
 		}
 
 		recorder := httptest.NewRecorder()
-		endpoints.GetLogs(recorder, req)
+		getLogs(recorder, req)
 
 		res := recorder.Result()
 
