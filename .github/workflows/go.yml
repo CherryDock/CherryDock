@@ -38,4 +38,5 @@ jobs:
     - name: Test
       run: |
         cd api
-        go test  -v ./test
+        go test -cover ./...
+
