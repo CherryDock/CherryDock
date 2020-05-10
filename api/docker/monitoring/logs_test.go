@@ -1,7 +1,6 @@
-package test
+package monitoring
 
 import (
-	"github.com/CherryDock/CherryDock/api/docker/monitoring"
 	"testing"
 )
 
@@ -17,7 +16,7 @@ func TestRetrieveLogs(t *testing.T) {
 
 	testLogsBadId := TestLogs{"xxxxxx", expectedLogs, expectedStatus}
 
-	logs, succeed := monitoring.RetrieveLogs(testLogsBadId.ContainerId)
+	logs, succeed := RetrieveLogs(testLogsBadId.ContainerId)
 
 	if len(logs) != 0 && succeed != expectedStatus {
 		t.Fatalf("Logs should be empty & succeed equal to false")

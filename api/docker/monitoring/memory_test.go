@@ -1,12 +1,11 @@
-package test
+package monitoring
 
 import "testing"
-import "github.com/CherryDock/CherryDock/api/docker/monitoring"
 
 func TestComputeMemory(t *testing.T) {
 
-	memoryStats := monitoring.ComputeMemory(4.0, 2.0, 1.0)
-	expected := monitoring.MemoryInfo{
+	memoryStats := ComputeMemory(4.0, 2.0, 1.0)
+	expected := MemoryInfo{
 		1,
 		4,
 		25.0,
@@ -15,8 +14,8 @@ func TestComputeMemory(t *testing.T) {
 		t.Errorf("Memory stats should be %v", expected)
 	}
 
-	memoryStats = monitoring.ComputeMemory(1.0, 0, 0)
-	expected = monitoring.MemoryInfo{
+	memoryStats = ComputeMemory(1.0, 0, 0)
+	expected = MemoryInfo{
 		0,
 		1,
 		0,
