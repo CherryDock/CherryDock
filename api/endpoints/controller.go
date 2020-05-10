@@ -11,19 +11,19 @@ func Routing() *mux.Router {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
-	router.HandleFunc("/api/monitor/logs", GetLogs)
+	router.HandleFunc("/api/monitor/logs", getLogs)
 	router.HandleFunc("/api/monitor/stats", monitorAll)
 	router.HandleFunc("/api/action/stop-all", stopAll)
 	router.HandleFunc("/api/action/start-all", startAll)
-	router.HandleFunc("/api/action/start", StartSingle)
-	router.HandleFunc("/api/action/stop", StopSingle)
-	router.HandleFunc("/api/action/restart", RestartSingle)
-	router.HandleFunc("/api/action/remove", RemoveSingle)
+	router.HandleFunc("/api/action/start", startSingle)
+	router.HandleFunc("/api/action/stop", stopSingle)
+	router.HandleFunc("/api/action/restart", restartSingle)
+	router.HandleFunc("/api/action/remove", removeSingle)
 
 	return router
 }
 
-func StartSingle(w http.ResponseWriter, r *http.Request) {
+func startSingle(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 	if id != "" {
 		success := actions.ActionSingleContainer(actions.StartContainer, id)
@@ -37,7 +37,7 @@ func StartSingle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func StopSingle(w http.ResponseWriter, r *http.Request) {
+func stopSingle(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 	if id != "" {
 		success := actions.ActionSingleContainer(actions.StopContainer, id)
@@ -52,7 +52,7 @@ func StopSingle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func RestartSingle(w http.ResponseWriter, r *http.Request) {
+func restartSingle(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 	if id != "" {
 		success := actions.ActionSingleContainer(actions.RestartContainer, id)
@@ -67,7 +67,7 @@ func RestartSingle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func RemoveSingle(w http.ResponseWriter, r *http.Request) {
+func removeSingle(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
 	if id != "" {
 		success := actions.ActionSingleContainer(actions.RemoveContainer, id)
@@ -106,7 +106,7 @@ func getContainersInfoJson(w http.ResponseWriter, r *http.Request) {
 	w.Write(containersInfo)
 }
 
-func GetLogs(w http.ResponseWriter, r *http.Request) {
+func getLogs(w http.ResponseWriter, r *http.Request) {
 	containerdId := r.FormValue("id")
 	w.Header().Set("content-type", "application/json")
 
