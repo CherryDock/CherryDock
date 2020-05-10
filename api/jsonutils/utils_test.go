@@ -1,7 +1,6 @@
-package test
+package jsonutils
 
 import (
-	"github.com/CherryDock/CherryDock/api/jsonutils"
 	"testing"
 )
 
@@ -13,7 +12,7 @@ func TestFormatToJson(t *testing.T) {
 
 	test := TestStruct{1.0, "test"}
 
-	formated := jsonutils.FormatToJson(test)
+	formated := FormatToJson(test)
 	var expected = `{"Val1":1,"Val2":"test"}`
 
 	if string(formated) != expected {
@@ -29,9 +28,9 @@ func TestParseJson(t *testing.T) {
 
 	test := TestStruct{1.0, "test"}
 
-	formated := jsonutils.FormatToJson(test)
+	formated := FormatToJson(test)
 
-	parsed := jsonutils.ParseJson(formated)
+	parsed := ParseJson(formated)
 
 	if parsed["Val1"] != 1.0 || parsed["Val2"] != "test" {
 		t.Fatal("Fail to parse to json")
