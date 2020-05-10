@@ -28,7 +28,7 @@ func TestStart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		StartSingle(recorder, req)
+		startSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -56,7 +56,7 @@ func TestStop(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		StopSingle(recorder, req)
+		stopSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -83,7 +83,7 @@ func TestRestart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		RestartSingle(recorder, req)
+		restartSingle(recorder, req)
 
 		res := recorder.Result()
 
@@ -111,7 +111,7 @@ func TestGetLogs(t *testing.T) {
 		}
 
 		recorder := httptest.NewRecorder()
-		GetLogs(recorder, req)
+		getLogs(recorder, req)
 
 		res := recorder.Result()
 
