@@ -46,4 +46,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./coverage.txt
           flags: unittests
-
+          run: bash <(curl -s https://codecov.io/bash)
