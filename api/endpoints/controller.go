@@ -3,25 +3,8 @@ package endpoints
 import (
 	"github.com/CherryDock/CherryDock/api/docker/actions"
 	"github.com/CherryDock/CherryDock/api/docker/monitoring"
-	"github.com/gorilla/mux"
 	"net/http"
 )
-
-func Routing() *mux.Router {
-	router := mux.NewRouter().StrictSlash(true)
-
-	router.HandleFunc("/api/monitor/containers-info", getContainersInfoJson)
-	router.HandleFunc("/api/monitor/logs", getLogs)
-	router.HandleFunc("/api/monitor/stats", monitorAll)
-	router.HandleFunc("/api/action/stop-all", stopAll)
-	router.HandleFunc("/api/action/start-all", startAll)
-	router.HandleFunc("/api/action/start", startSingle)
-	router.HandleFunc("/api/action/stop", stopSingle)
-	router.HandleFunc("/api/action/restart", restartSingle)
-	router.HandleFunc("/api/action/remove", removeSingle)
-
-	return router
-}
 
 func startSingle(w http.ResponseWriter, r *http.Request) {
 	id := r.FormValue("id")
