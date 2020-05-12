@@ -44,6 +44,6 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.txt
+          file: ./api/coverage.txt
           flags: unittests
           run: bash <(curl -s https://codecov.io/bash)
