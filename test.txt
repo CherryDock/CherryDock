@@ -1,0 +1,515 @@
+commit 9950a21a76f8124246c040796c2e096192eb24a8
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 13 00:47:42 2020 +0200
+
+    Test get cpu info
+
+commit 56891b0df9aeb8a7bad8c52d01abd21693a8ade8
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 20:05:06 2020 +0200
+
+    Codecov test coverage badge
+
+commit a2742d8d519dc0c557edfc731e13610338b54c0c
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 19:54:43 2020 +0200
+
+    Fix coverage.txt path
+
+commit ce5d616b2be056f49cc3402d3f6f78cde10dd7ba
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 19:34:29 2020 +0200
+
+    push to codecov
+
+commit 0cd6003340c3b9e60c4c72e985233e8429c77e00
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 19:22:36 2020 +0200
+
+    Code coverage - codecov integration
+
+commit f7719b75372e9270bd588612aabd1bf6d547d2a8
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 18:54:05 2020 +0200
+
+    Jwt authentification
+
+commit a62b99aa5b0de12a47ec7a5f7ce449b042e1b9ad
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 15:55:31 2020 +0200
+
+    Jwt dependencies
+
+commit 1ba99cc72429e728459ac0d160c639d6fd7c6564
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 15:55:07 2020 +0200
+
+    Jwt authentification on all existing routes
+
+commit cf6fa3cbffa1a815f0c5ff8674b2fde8549b0c07
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Tue May 12 15:54:11 2020 +0200
+
+    Move routing to separate file
+
+commit 621ac50bf91100b9ae8599d650a2e2e82589a591
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 18:44:30 2020 +0200
+
+    Test Network stat conversion
+
+commit 6c74d0b8e47f38d69888d0e0d06565d2dc479072
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 18:43:27 2020 +0200
+
+    Add bit handling & modify o to b
+
+commit e2b5234f603957f3a35e67f6c93f5a66566d8c89
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 17:38:18 2020 +0200
+
+    Change uppercase function name to lowercase
+
+commit 708100535a2697ba6785165ae1a3313dd0addfc9
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 17:28:52 2020 +0200
+
+    Update Test stage, add -cover & recursive test
+
+commit cf84ca952f8663a85742771e854345e05aa9293b
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 17:18:39 2020 +0200
+
+    Move test to appropriate location (Fix go test 0% coverage bug)
+
+commit d9223329d2bec0d90a488d22ba3c1934dd2dbd00
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 16:44:31 2020 +0200
+
+    Add unit to MemoryLimit field
+
+commit ce7006ef61490013549c50eaee2d4233f7d169b1
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 16:28:53 2020 +0200
+
+    Rename CpuUsage & MemoryUsage fields
+
+commit 2f613a1e47d53d3bfe349cffa667843de21bcced
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 15:55:20 2020 +0200
+
+    Include network stats
+
+commit f8596396b0bdc60aeaace6793ee2fcc126b96b3a
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 15:55:05 2020 +0200
+
+    Compute network in/out
+
+commit d2fe6e0abecb0e6b2d0c198ea35ad78f68971996
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 10 01:09:00 2020 +0200
+
+    Remove container-memory
+
+commit 4a7407f4a63f6fb7d229f06e899b40fe99979943
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 22:38:31 2020 +0200
+
+    Add unit field to memory
+
+commit dbad4449eeb1e2086f983c487abc9e13c212c5f7
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 22:35:38 2020 +0200
+
+    Return unit from byte conversion
+
+commit d6158bbf996b676f0c59e1961a915d60e3952416
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 19:58:38 2020 +0200
+
+    Convert memory limit to GiB
+
+commit d889dcdc8fa52cb8478e017529f6d155d8345ba3
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 19:58:23 2020 +0200
+
+    Byte conversion
+
+commit d4ae059015050afa4d0e6fa18a906955d0bdd740
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 18:59:27 2020 +0200
+
+    Add license badge
+
+commit 8e169f3d94430b6f728b4ea0fb126c51ebf7e885
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 18:18:22 2020 +0200
+
+    Add code climate badge for go api
+
+commit 2f5d74eee1f3b836fd76bf4c9aabb92642253fc6
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 14:06:31 2020 +0200
+
+    Add build badge for go api
+
+commit f5629b86982b2d3b621d44f6f7e192755dd3fe52
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 13:09:32 2020 +0200
+
+    Update build
+
+commit 28b58159a48c2d82d279500ed02b0545216c209f
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 13:07:34 2020 +0200
+
+    Update build
+
+commit 5d661f948d2f3f45d178abc7aed01cb00a0fd576
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 13:06:05 2020 +0200
+
+    Update build
+
+commit 1b3d4c8bd6191be364004be83d4d10b4590b28d0
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 13:02:39 2020 +0200
+
+    Update build
+
+commit 7fd6bd6b41c79ea602d6dfb3fa40cd3a0182e2be
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 13:00:27 2020 +0200
+
+    Rename module
+
+commit 7cbad8db761a2b03eb0567e50187405058b77b03
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 12:56:42 2020 +0200
+
+    Rename module
+
+commit 303bd395c61dd63427daae5b91d95d6042cc9372
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 12:53:39 2020 +0200
+
+    Rename module
+
+commit 19b828b304f6246abb70035ebd6fe83895d93996
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 9 12:47:20 2020 +0200
+
+    React app integration
+
+commit a06872f9d39ab643652067379758233436ef22fc
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 8 18:38:18 2020 +0200
+
+    Add test retrieve logs
+
+commit 6f6d613f048c228e37f214fb7323c955d8b12b1c
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 8 18:13:08 2020 +0200
+
+    Rename TestLogs to TestGetLogs
+
+commit 75ecdaffe3beabd13163cd9f35640c4414bb080f
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 8 18:07:34 2020 +0200
+
+    Handle case retrieve logs fail, add bool to return statement
+
+commit 9fafb782fe87daa116e84c0f1d752cf6e3868669
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 8 18:06:40 2020 +0200
+
+    Test get logs
+
+commit b17bc0a5d45f9376bf0f0e0d5fbdc376b9c3e45e
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 8 18:06:06 2020 +0200
+
+    Add status code to GetLogs handler
+
+commit b4a97bf2b09ced11ec9759118bc24fa460abdbf4
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu May 7 00:53:57 2020 +0200
+
+    Add remove single container route
+
+commit 9a65f4d36f44b8a5e8cdd9a341f8eab420b7097f
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu May 7 00:53:24 2020 +0200
+
+    Remove container function
+
+commit 14b50f3a3fb8ef2a0ad937526f1c9359f6cf3be2
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:26:45 2020 +0200
+
+    Add workdir
+
+commit c3caec0c003a052c149191da9906a7c1ded18b80
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:15:58 2020 +0200
+
+    Rename test compute stats
+
+commit 9084638fc3df29b42722be90fd18bd7b6df846d2
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:12:40 2020 +0200
+
+    Include cpu & memory usage
+
+commit 87795fbab1b127cb8ae1a55e892b4523eef8b27d
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:12:06 2020 +0200
+
+    Memory usage monitoring
+
+commit 757e22d800bc4797d3610c3724add2f477d1b872
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:11:48 2020 +0200
+
+    Cpu usage monitoring
+
+commit 7d5b5e8a9dd1f3b66047e614fc15adfbfb7f650a
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:06:41 2020 +0200
+
+    Docker stats struct
+
+commit cdc3b8b01744063f59a0402008411787a0788902
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 23:06:02 2020 +0200
+
+    Add global stats route & remove memory route
+
+commit 7d14d5ab4ed756bf868f062b89d0af53e6197a5b
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed May 6 00:10:33 2020 +0200
+
+    Remove unused schedule function
+
+commit eaf80c20634258a7c1c4783e464ca15c881a678f
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 18:52:53 2020 +0200
+
+    Json utils test
+
+commit 647eb135e6452a0a8f7a7f538df28b0782ed86f5
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 17:37:45 2020 +0200
+
+    Add test restart single container
+
+commit 794e0aa1d0cb42d2f968f706cc76943b51c295c6
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 17:37:14 2020 +0200
+
+    Add restart single container endpoint & handler
+
+commit 329e6f3be781e8c442cd929b66f28641805d607b
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 17:36:45 2020 +0200
+
+    Restart single container
+
+commit 0f8a3cc03e7f7c5d3fcde2bc7ccede3179ff0d65
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 16:31:13 2020 +0200
+
+    Add Dockerfile
+
+commit f35ed87dd260c7e121dc879ff4e24122370c950a
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 16:07:15 2020 +0200
+
+    change branch to development
+
+commit 6f4748eaf73490820bb2ec8dbae437c9207a104e
+Author: Fszta <36471574+Fszta@users.noreply.github.com>
+Date:   Sun May 3 15:58:41 2020 +0200
+
+    Create go.yml
+
+commit b83bea60641266e70177a1c1a71123792f97699c
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 16:01:20 2020 +0200
+
+    comments
+
+commit 956889445d78e3ed57c3fd7e55da43827aaf3be4
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 15:42:31 2020 +0200
+
+    Retrieve logs for a specific container
+
+commit d6e55e638fa0036ce661472e4798d54d4fbecb03
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 15:41:57 2020 +0200
+
+    Action on single & all containers routes
+
+commit f9643fd94657d055d049bb7ed11b5aab5d737648
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 15:41:06 2020 +0200
+
+    Add compute stats test
+
+commit fc660fdccadbc85ea2fe38282a63f0c2f2e420ef
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 15:40:00 2020 +0200
+
+    Api test : start & stop single container
+
+commit efbbf67ba80d0f1306cef086b393643d4116231d
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sun May 3 13:48:30 2020 +0200
+
+    Add all parameter to action on all container to apply function to running containers only or all, even down
+
+commit 663412f74adc88bfce84e923d12fab80f825306e
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 2 19:55:25 2020 +0200
+
+    Remove panic error
+
+commit 36ed67a282fe30174016244b18972b1cfab5b12a
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 2 19:44:51 2020 +0200
+
+    Rename get containers func use
+
+commit 2c7018b992ce291ba80d9ff011b5419147b11755
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 2 19:40:52 2020 +0200
+
+    Rename functions & add logs
+
+commit c99ba19b5660ef06308d38699df33d0f11469fdd
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 2 19:39:18 2020 +0200
+
+    Add return success bool
+
+commit b625727e6fcce844576d18e5097b7b6e0f52ee02
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Sat May 2 19:37:57 2020 +0200
+
+    Add high order function action
+
+commit 41fedff09451307cd5ad396eca83e1eaaeab6000
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 1 03:24:02 2020 +0200
+
+    Fix route action parameters form
+
+commit 3433c9ff43203ef70d394c3b384448b4082341d0
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 1 02:38:14 2020 +0200
+
+    .idea
+
+commit 9b996a47c393b511d40286298b488f9e417ca391
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 1 02:36:39 2020 +0200
+
+    restructure project
+
+commit 49b5d6f9fe78e0496e77daadad13460ca9cf0109
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Fri May 1 02:36:00 2020 +0200
+
+    Add .gitignore
+
+commit 121d31da24d33b9c3255507664f118172dc7f80b
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 15:54:17 2020 +0200
+
+    Remove get subfield function (unused)
+
+commit 02b4de887e187d1bf451a9024d5ed1e400844e4c
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 15:47:34 2020 +0200
+
+    Handle single action on container
+
+commit 06e26482cbd14daa58a92eb1c6e38e076ca2331e
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 15:47:02 2020 +0200
+
+    Start single container function
+
+commit b7f3e03739aa6382b707296c0d01f588af9f999f
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 15:46:35 2020 +0200
+
+    Stop single container function
+
+commit 974040f3e9968fd2390a19f713aadec2562bbd41
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 15:44:02 2020 +0200
+
+    Add handle action route (single container action)
+
+commit 89427376e14a692bd5932215ed072cbe859969e7
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 14:53:03 2020 +0200
+
+    Go dependencies
+
+commit 2dc7b1c094eca483c15dd91b0eb8328333e3a97e
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Thu Apr 30 14:52:10 2020 +0200
+
+    Rename go module
+
+commit bd5fb955520bb8808d51b9e90d7d7fbad9d2106b
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:31:20 2020 +0200
+
+    Fix config path
+
+commit 1d4f79d0b432ec40c2e9b5969590016464bc24cd
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:27:16 2020 +0200
+
+    Json utils functions
+
+commit 2f0d872d2de592c9fb3f782b3102c39f8ad7a137
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:27:01 2020 +0200
+
+    Global memory stats
+
+commit 0b27f8f74d4e67b21b67b96b62931470ba5b4058
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:26:10 2020 +0200
+
+    Compute containers memory stats
+
+commit 5f8e390ab05dad3b4836e352f9cfdcf4c5d7ce4d
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:25:34 2020 +0200
+
+    List containers functions
+
+commit 546bfad844de275b5a2ae93db60a691c9ed80e95
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:24:58 2020 +0200
+
+    Add routes controller
+
+commit 3198143acce7916d423bdbfabcae845a33c80ecc
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:24:39 2020 +0200
+
+    Add configuration module
+
+commit 26d7a7974db05f6651659479b32f9169937c642a
+Author: ferszte <antoinefer@hotmail.com>
+Date:   Wed Apr 29 18:23:39 2020 +0200
+
+    Add http server
