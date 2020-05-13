@@ -1,0 +1,39 @@
+$button-blue: #6fb2ed;
+$icon-close-color: rgb(30, 110, 185);
+
+.containerSelection {
+  margin-top: 1rem;
+  display: inline-flex;
+  background-color: white;
+  padding: 0.8rem 0.8rem;
+  border-radius: 20px;
+  align-items: center;
+
+  .label {
+    font-size: 1.2rem;
+  }
+
+  .button {
+    margin-left: 1rem;
+    background-color: white;
+    border: none;
+    padding: .5rem .7rem;
+
+    .closeIcon {
+        background-color: rgba($icon-close-color, .8);
+        padding: .2rem .3rem;
+        border-radius: 20px;
+        color: white;
+    }
+
+    .closeLabel {
+        margin-left: .5rem;
+        color: $icon-close-color;
+    }
+
+    &:hover {
+        background-color: rgba($button-blue, .1);
+        cursor: pointer;
+    }
+  }
+}

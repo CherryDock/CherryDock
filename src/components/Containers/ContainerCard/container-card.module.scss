@@ -1,0 +1,131 @@
+$status-green: #78e38c;
+$status-red: #f2877c;
+$status-blue: #6fb2ed;
+$card-background-color: #fff;
+$primary-text-color: #3e423f;
+$primary-text-color-dark: #262726;
+$see-more-background-color: rgb(30, 110, 185);
+
+.card {
+  margin-top: 2rem;
+  border: 1px solid rgba(grey, 0.3);
+  border-radius: 20px;
+  padding: 1rem;
+  background-color: $card-background-color;
+  opacity: 0.8;
+
+  &:hover {
+    cursor: pointer;
+    transform: translateY(-2px);
+    -webkit-box-shadow: 11px 10px 21px -4px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 11px 10px 21px -4px rgba(0, 0, 0, 0.16);
+    box-shadow: 11px 10px 21px -4px rgba(0, 0, 0, 0.16);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(grey, 0.3);
+    padding-bottom: 0.8rem;
+
+    .containerName {
+      margin-left: 0.8rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: $primary-text-color;
+    }
+
+    .containerState {
+      background-color: $status-green;
+      padding: 0.3rem 0.5rem;
+      border-radius: 20px;
+      border: solid 1px rgba(grey, 0.3);
+      margin-left: 1rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  .imageName {
+    display: inline-block;
+    margin-top: 0.6rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      font-size: 1.5rem;
+    }
+
+    .label {
+      margin-left: 0.8rem;
+      font-weight: 500;
+      color: $primary-text-color-dark;
+    }
+  }
+
+  .cardContent {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+
+    .leftPart {
+      .more {
+        display: flex;
+        align-items: center;
+        margin-left: 1rem;
+
+        .icon {
+          font-size: 1.5rem;
+        }
+        .button {
+          margin-left: 0.8rem;
+          border-radius: 15px;
+          padding: 0.2rem 0.8rem;
+          font-weight: 500;
+          background-color: rgba($see-more-background-color, .1);
+          border: none;
+
+          &:hover {
+            cursor: pointer;
+            background-color: rgba($see-more-background-color, .3);
+
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+
+    .rightPart {
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+
+      .dateContainer {
+        display: flex;
+        align-items: center;
+        .icon {
+          font-size: 1.5rem;
+        }
+        .dateValue {
+          padding-left: 1rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          .label {
+            font-weight: 500;
+            color: $primary-text-color-dark;
+          }
+          .date {
+            color: $primary-text-color-dark;
+          }
+        }
+      }
+    }
+  }
+}
+
+.cardSelected {
+  border: 1.5px solid rgba(grey, 0.8);
+  opacity: 1;
+}
+

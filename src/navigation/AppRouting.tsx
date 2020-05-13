@@ -8,7 +8,7 @@ import {
     Link
 } from "react-router-dom";
 import style from './app-routing.module.scss';
-import Home from '../screens/Home/Home';
+import Containers from '../screens/Containers/Containers';
 
 function AppRouting() {
     return (
@@ -18,7 +18,7 @@ function AppRouting() {
             </div>
             <div className={style.appScreen}>
                 <NavBar />
-                <Home />
+                <Containers />
             </div>
         </div>
     )
