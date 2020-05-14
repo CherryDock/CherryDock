@@ -77,6 +77,13 @@ func stopAll(w http.ResponseWriter, r *http.Request) {
 	w.Write(states)
 }
 
+func monitorSingle(w http.ResponseWriter, r *http.Request) {
+	containerdId := r.FormValue("id")
+	stats := monitoring.SingleMonitoring(containerdId)
+	w.Header().Set("content-type", "application/json")
+	w.Write(stats)
+}
+
 func monitorAll(w http.ResponseWriter, r *http.Request) {
 	globalStats := monitoring.GlobalMonitoring()
 	w.Header().Set("content-type", "application/json")

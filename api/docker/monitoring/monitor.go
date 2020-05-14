@@ -34,6 +34,31 @@ func getStats(containerId string) ContainerStats {
 	return stt
 }
 
+func SingleMonitoring(containerId string) []byte {
+
+	stats := getStats(containerId)
+
+	// Extract memory info
+	memoryPercent := stats.MemoryInfo.UtilizationPercent
+	memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
+
+	// Extract Cpu percentage of use
+	cpuPercent := stats.CpuInfo.CpuPercent
+
+	containerInfo := Container{
+		containerId,
+		Info{
+			cpuPercent,
+			memoryPercent,
+			Memory{
+				memoryValue,
+				memoryUnit},
+			stats.NetworkInfo,
+		}}
+
+	return json_utils.FormatToJson(containerInfo)
+}
+
 func GlobalMonitoring() []byte {
 	// Extract running containers id
 	runningContainers := ContainersId(false)
@@ -68,7 +93,6 @@ func GlobalMonitoring() []byte {
 			cpuPercent := stats.CpuInfo.CpuPercent
 			globalCpuUsage += cpuPercent
 
-			// Network info
 			containerInfo = append(containerInfo,
 				Container{
 					containerId,
