@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: |
           cd api
-          go build -v
+          go build -v ./cmd/cherrydock
 
       - name: Test
         run: |
