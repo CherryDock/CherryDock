@@ -25,6 +25,9 @@ func Routing() *mux.Router {
 	router.Handle("/api/action/stop", jwt.CheckToken(http.HandlerFunc(stopSingle)))
 	router.Handle("/api/action/restart", jwt.CheckToken(http.HandlerFunc(restartSingle)))
 	router.Handle("/api/action/remove", jwt.CheckToken(http.HandlerFunc(removeSingle)))
+	router.Handle("/api/action/kill", jwt.CheckToken(http.HandlerFunc(killSingle)))
+	router.Handle("/api/action/pause", jwt.CheckToken(http.HandlerFunc(pauseSingle)))
+	router.Handle("/api/action/unpause", jwt.CheckToken(http.HandlerFunc(unpauseSingle)))
 
 	return router
 }
