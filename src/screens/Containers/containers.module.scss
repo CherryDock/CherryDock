@@ -17,9 +17,10 @@ $primary-text-color: #3e423f;
   .containers {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     .containerCard {
-      margin-left: 1rem;
+      
     }
   }
 }
