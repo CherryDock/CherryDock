@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import style from './container-details.module.scss';
-
-interface ContainerDetailsProps {
-    match: any;
-}
+import { useParams } from "react-router-dom";
+import ActionButtons from '../../components/ContainerDetails/ActionButtons/ActionButtons';
 
 function ContainerDetails() {
-    const [containerId, setcontainerId] = useState<number>();
-
-    useEffect(() => {
-        //const containerIdFromParams = match
-    }, []);
+    const { id } = useParams();
 
     return (
         <div>
-            <h3>Container Details</h3>
+            <div className={style.actionButons}>
+            <ActionButtons />
+            </div>
         </div>
     )
 }

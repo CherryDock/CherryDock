@@ -1,0 +1,33 @@
+$button-background-color: #6fb2ed;
+$button-color: #3e423f;
+
+.actionButtonsContainer {
+  display: flex;
+  justify-content: space-evenly;
+
+  .actionButton {
+      display: flex;
+      align-items: center;
+      border-radius: 30px;
+      padding: 1rem 2rem;
+      border: none;
+
+      &:hover {
+          cursor: pointer;
+          background-color: rgba($button-background-color, .1);
+          transform: scale(1.05);
+      }
+
+    .actionLabel {
+      font-size: 2rem;
+      margin-left: 1rem;
+      color: $button-color;
+      font-weight: 600;
+    }
+
+    .actionIcon {
+      font-size: 5rem;
+      color: $button-color;
+    }
+  }
+}
