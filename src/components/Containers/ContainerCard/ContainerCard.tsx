@@ -30,7 +30,28 @@ function ContainerCard({
         alert('Go to the details page of the container ' + id);
     }
 
-    const cardClass = selected? [style.card, style.cardSelected] : [style.card];
+    const cardClass = selected ? [style.card, style.cardSelected] : [style.card];
+
+    /**
+     * Get the class name of the state label of the card
+     */
+    function getStateClass(): string[] {
+        var stateClass: string[];
+        switch (containerState) {
+            case "running":
+                stateClass = [style.containerState, style.containerStateRunning];
+                break;
+            case "stopped":
+                stateClass = [style.containerState, style.containerStateStopped];
+                break;
+            case "created":
+                stateClass = [style.containerState, style.containerStateCreated];
+                break;
+            default:
+                stateClass = [style.containerState, style.containerStateRunning]
+        }
+        return stateClass;
+    }
 
     return (
         <div className={cx(cardClass)}
@@ -38,7 +59,7 @@ function ContainerCard({
         >
             <div className={style.header}>
                 <span className={style.containerName}>{containerName}</span>
-                <span className={style.containerState}>{containerState}</span>
+                <span className={cx(getStateClass())}>{containerState}</span>
             </div>
 
             <div className={style.imageName}>
