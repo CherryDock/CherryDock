@@ -9,18 +9,32 @@ import {
 } from "react-router-dom";
 import style from './app-routing.module.scss';
 import Containers from '../screens/Containers/Containers';
+import Home from '../screens/Home/Home';
+import ContainerDetails from '../screens/ContainerDetails/ContainerDetails';
 
 function AppRouting() {
     return (
-        <div className={style.layout}>
-            <div className={style.sidebar}>
-                <SideBar />
+        <Router>
+            <div className={style.layout}>
+                <div className={style.sidebar}>
+                    <SideBar />
+                </div>
+                <div className={style.appScreen}>
+                    <NavBar />
+                    <Switch>
+                        <Route exact path="/">
+                            <Home />
+                        </Route>
+                        <Route path="/containers">
+                            <Containers />
+                        </Route>
+                        <Route path="/container-details/:id">
+                            <ContainerDetails />
+                        </Route>
+                    </Switch>
+                </div>
             </div>
-            <div className={style.appScreen}>
-                <NavBar />
-                <Containers />
-            </div>
-        </div>
+        </Router>
     )
 }
 

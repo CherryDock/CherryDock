@@ -3,7 +3,9 @@ import style from './home.module.scss';
 
 function Home() {
     return (
-       <div></div>
+       <div>
+           <h1>Hello</h1>
+       </div>
     )
 }
 
