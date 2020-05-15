@@ -35,7 +35,7 @@ export default [
     {
         id:5,
         containerName: 'intellifire_docker_apache_1',
-        containerState: 'stopped',
+        containerState: 'created',
         imageName: 'webdevops/php-apache:latest',
         launchedDate: '2019-09-09 15:12:14',
         selected: false
