@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './container-card.module.scss';
 import cx from 'classnames';
+import { useHistory } from "react-router-dom";
 
 interface ContainerCardProps {
     id: number;
@@ -21,13 +22,16 @@ function ContainerCard({
     selected,
     toggleContainerFunc }: ContainerCardProps) {
 
+    let history = useHistory();
+
     function onCardClick() {
         toggleContainerFunc(id);
     }
 
     function onSeeMoreClick(event: React.MouseEvent<HTMLElement>) {
         event.stopPropagation();
-        alert('Go to the details page of the container ' + id);
+        const nextPageUrl = 'container-details/' + id.toString();
+        history.push(nextPageUrl);
     }
 
     const cardClass = selected ? [style.card, style.cardSelected] : [style.card];

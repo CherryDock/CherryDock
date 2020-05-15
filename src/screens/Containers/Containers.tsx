@@ -5,16 +5,16 @@ import ContainerCard from '../../components/Containers/ContainerCard/ContainerCa
 import containerData from './data';
 import SelectedContainers from '../../components/Containers/SelectedContainers/SelectedContainers';
 
-function Containers() {
+interface Container {
+    id: number;
+    containerName: string;
+    containerState: string;
+    imageName: string;
+    launchedDate: string;
+    selected: boolean;
+}
 
-    interface Container {
-        id: number;
-        containerName: string;
-        containerState: string;
-        imageName: string;
-        launchedDate: string;
-        selected: boolean;
-    }
+function Containers() {
 
     const [containers, setContainers] = useState<Container[]>([])
 
@@ -47,7 +47,7 @@ function Containers() {
 
     const displayContainers = containers.map(container => {
         return (
-            <div className={style.containerCard}>
+            <div key={container.id} className={style.containerCard}>
                 <ContainerCard
                     key={container.id}
                     id={container.id}
@@ -63,7 +63,7 @@ function Containers() {
     })
 
     function resetContainerSelection() {
-        const containersWithSelectionReset= containers.map(container => {
+        const containersWithSelectionReset = containers.map(container => {
             if (container.selected === true) {
                 return {
                     ...container,
@@ -82,9 +82,9 @@ function Containers() {
             .length
         if (numSelectedContainers > 0) {
             return (<SelectedContainers
-                numContainers={numSelectedContainers} 
+                numContainers={numSelectedContainers}
                 deselectedContainer={resetContainerSelection}
-                />)
+            />)
         }
 
         else return (<div></div>)
