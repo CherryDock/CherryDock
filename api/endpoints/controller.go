@@ -65,6 +65,51 @@ func removeSingle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func killSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.KillContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to kill container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to kill container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func pauseSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.PauseContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to kill pause, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to pause container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
+func unpauseSingle(w http.ResponseWriter, r *http.Request) {
+	id := r.FormValue("id")
+	if id != "" {
+		success := actions.ActionSingleContainer(actions.UnpauseContainer, id)
+
+		if success == true {
+			w.WriteHeader(http.StatusOK)
+		} else {
+			http.Error(w, "Fail to unpause container, id not exists", http.StatusNotFound)
+		}
+	} else {
+		http.Error(w, "Fail to unpause container, id parameter is missing", http.StatusBadRequest)
+	}
+}
+
 func startAll(w http.ResponseWriter, r *http.Request) {
 	states := actions.ActionOnAllContainer(actions.StartContainer, true)
 	w.Header().Set("content-type", "application/json")
