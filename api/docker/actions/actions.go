@@ -6,7 +6,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
-type action func(ctx context.Context, cli *client.Client, containerId string) error
+type Action func(ctx context.Context, cli *client.Client, containerId string) error
 
 type actionState struct {
 	containerId string
