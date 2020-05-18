@@ -28,7 +28,7 @@ func TestStart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		startSingle(recorder, req)
+		start(recorder, req)
 
 		res := recorder.Result()
 
@@ -38,7 +38,6 @@ func TestStart(t *testing.T) {
 
 		res.Body.Close()
 	}
-
 }
 
 func TestStop(t *testing.T) {
@@ -56,7 +55,7 @@ func TestStop(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		stopSingle(recorder, req)
+		stop(recorder, req)
 
 		res := recorder.Result()
 
@@ -83,7 +82,115 @@ func TestRestart(t *testing.T) {
 			t.Fatalf("could not create request %s", err)
 		}
 		recorder := httptest.NewRecorder()
-		restartSingle(recorder, req)
+		restart(recorder, req)
+
+		res := recorder.Result()
+
+		if res.StatusCode != test.ExpectedStatus {
+			t.Fatalf("Expected status %v", test.ExpectedStatus)
+		}
+
+		res.Body.Close()
+	}
+}
+
+func TestRemove(t *testing.T) {
+	// Test restart single container
+	var url = "http://0.0.0.0:8001/api/action/remove?id="
+	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
+	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
+
+	testActions := [2]SingleActionTest{stopWithEmptyId, stopWithUnknowId}
+
+	for _, test := range testActions {
+		req, err := http.NewRequest(test.Method, test.Url+test.Id, nil)
+
+		if err != nil {
+			t.Fatalf("could not create request %s", err)
+		}
+		recorder := httptest.NewRecorder()
+		restart(recorder, req)
+
+		res := recorder.Result()
+
+		if res.StatusCode != test.ExpectedStatus {
+			t.Fatalf("Expected status %v", test.ExpectedStatus)
+		}
+
+		res.Body.Close()
+	}
+}
+
+func TestPause(t *testing.T) {
+	// Test pause single container
+	var url = "http://0.0.0.0:8001/api/action/pause?id="
+	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
+	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
+
+	testActions := [2]SingleActionTest{stopWithEmptyId, stopWithUnknowId}
+
+	for _, test := range testActions {
+		req, err := http.NewRequest(test.Method, test.Url+test.Id, nil)
+
+		if err != nil {
+			t.Fatalf("could not create request %s", err)
+		}
+		recorder := httptest.NewRecorder()
+		restart(recorder, req)
+
+		res := recorder.Result()
+
+		if res.StatusCode != test.ExpectedStatus {
+			t.Fatalf("Expected status %v", test.ExpectedStatus)
+		}
+
+		res.Body.Close()
+	}
+}
+
+func TestUnpause(t *testing.T) {
+	// Test unpause single container
+	var url = "http://0.0.0.0:8001/api/action/unpause?id="
+	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
+	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
+
+	testActions := [2]SingleActionTest{stopWithEmptyId, stopWithUnknowId}
+
+	for _, test := range testActions {
+		req, err := http.NewRequest(test.Method, test.Url+test.Id, nil)
+
+		if err != nil {
+			t.Fatalf("could not create request %s", err)
+		}
+		recorder := httptest.NewRecorder()
+		restart(recorder, req)
+
+		res := recorder.Result()
+
+		if res.StatusCode != test.ExpectedStatus {
+			t.Fatalf("Expected status %v", test.ExpectedStatus)
+		}
+
+		res.Body.Close()
+	}
+}
+
+func TestKill(t *testing.T) {
+	// Test kill single container
+	var url = "http://0.0.0.0:8001/api/action/kill?id="
+	stopWithEmptyId := SingleActionTest{"GET", url, "", http.StatusBadRequest}
+	stopWithUnknowId := SingleActionTest{"GET", url, "fakeId", http.StatusNotFound}
+
+	testActions := [2]SingleActionTest{stopWithEmptyId, stopWithUnknowId}
+
+	for _, test := range testActions {
+		req, err := http.NewRequest(test.Method, test.Url+test.Id, nil)
+
+		if err != nil {
+			t.Fatalf("could not create request %s", err)
+		}
+		recorder := httptest.NewRecorder()
+		restart(recorder, req)
 
 		res := recorder.Result()
 
