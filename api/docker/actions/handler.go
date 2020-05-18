@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-func ActionSingleContainer(singleAction action, containerId string) bool {
+func ActionSingleContainer(singleAction Action, containerId string) bool {
 	ctx := context.Background()
 	cli, err := client.NewEnvClient()
 
@@ -28,7 +28,7 @@ func ActionSingleContainer(singleAction action, containerId string) bool {
 	return succeed
 }
 
-func ActionOnAllContainer(singleAction action, all bool) []byte {
+func ActionOnAllContainer(singleAction Action, all bool) []byte {
 	ctx := context.Background()
 	cli, err := client.NewEnvClient()
 

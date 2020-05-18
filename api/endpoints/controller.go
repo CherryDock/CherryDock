@@ -6,108 +6,46 @@ import (
 	"net/http"
 )
 
-func startSingle(w http.ResponseWriter, r *http.Request) {
+func handleSingleAction(w http.ResponseWriter, r *http.Request, singleAction actions.Action) {
 	id := r.FormValue("id")
 	if id != "" {
-		success := actions.ActionSingleContainer(actions.StartContainer, id)
+		success := actions.ActionSingleContainer(singleAction, id)
 		if success == true {
 			w.WriteHeader(http.StatusOK)
 		} else {
-			http.Error(w, "Fail to start container, id not exists", http.StatusNotFound)
+			http.Error(w, "Fail to execute action, id not exists", http.StatusNotFound)
 		}
 	} else {
-		http.Error(w, "Fail to stop container, id parameter is missing", http.StatusBadRequest)
+		http.Error(w, "Fail to execute action, id parameter is missing", http.StatusBadRequest)
 	}
 }
 
-func stopSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.StopContainer, id)
-
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to stop container, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to stop container, id parameter is missing", http.StatusBadRequest)
-	}
+func start(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.StartContainer)
 }
 
-func restartSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.RestartContainer, id)
-
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to restart container, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to restart container, id parameter is missing", http.StatusBadRequest)
-	}
+func stop(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.StopContainer)
 }
 
-func removeSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.RemoveContainer, id)
-
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to remove container, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to remove container, id parameter is missing", http.StatusBadRequest)
-	}
+func restart(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.RestartContainer)
 }
 
-func killSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.KillContainer, id)
-
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to kill container, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to kill container, id parameter is missing", http.StatusBadRequest)
-	}
+func remove(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.RemoveContainer)
 }
 
-func pauseSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.PauseContainer, id)
-
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to kill pause, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to pause container, id parameter is missing", http.StatusBadRequest)
-	}
+func kill(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.KillContainer)
 }
 
-func unpauseSingle(w http.ResponseWriter, r *http.Request) {
-	id := r.FormValue("id")
-	if id != "" {
-		success := actions.ActionSingleContainer(actions.UnpauseContainer, id)
+func pause(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.PauseContainer)
+}
 
-		if success == true {
-			w.WriteHeader(http.StatusOK)
-		} else {
-			http.Error(w, "Fail to unpause container, id not exists", http.StatusNotFound)
-		}
-	} else {
-		http.Error(w, "Fail to unpause container, id parameter is missing", http.StatusBadRequest)
-	}
+func unpause(w http.ResponseWriter, r *http.Request) {
+	handleSingleAction(w, r, actions.UnpauseContainer)
 }
 
 func startAll(w http.ResponseWriter, r *http.Request) {
@@ -122,7 +60,7 @@ func stopAll(w http.ResponseWriter, r *http.Request) {
 	w.Write(states)
 }
 
-func monitorSingle(w http.ResponseWriter, r *http.Request) {
+func monitor(w http.ResponseWriter, r *http.Request) {
 	containerdId := r.FormValue("id")
 	stats := monitoring.SingleMonitoring(containerdId)
 	w.Header().Set("content-type", "application/json")
