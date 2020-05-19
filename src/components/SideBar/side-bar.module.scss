@@ -3,7 +3,8 @@ $sidebar-background-color-light: #33609c;
 $primary-text-color: #f2f3f5;
 
 .container {
-  height: 100vh;
+  background-color: $sidebar-background-color-light;
+  height: 100%;
 
   .appName {
     background-color: $sidebar-background-color;
@@ -21,8 +22,6 @@ $primary-text-color: #f2f3f5;
     }
   }
   .links {
-    background-color: $sidebar-background-color-light;
-    height: 100vh;
     margin: 0;
     padding: 0;
 

@@ -4,6 +4,7 @@
 
 .sidebar {
     width: 15%;
+    min-height: 100%;
 
     @media only screen and (max-width: 1050px) {
         width: 20%;
