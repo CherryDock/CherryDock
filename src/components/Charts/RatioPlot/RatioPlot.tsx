@@ -24,10 +24,19 @@ function LinePlot({ heightScreenRatio, data, title }: RatioPlotProps) {
 
     const numOfSlices = data.length;
 
-    const colors = colorsPalette.slice(0, numOfSlices);
-    const colorsHover = colorsPaletteHover.slice(0, numOfSlices);
+    const colors: string[] = [];
+    const colorsHover: string[] = [];
     const values = data.map(item => item.value);
     const labels = data.map(item => item.label);
+
+    for (let index = 0; index < numOfSlices; index++) {
+        const colorIndex = index % colorsPalette.length;
+        console.log(colorIndex);
+        colors.push(colorsPalette[colorIndex]);
+        colorsHover.push(colorsPaletteHover[colorIndex])
+    }
+
+    console.log(colors);
 
     const dataConf = {
         labels: labels,
@@ -63,7 +72,6 @@ function LinePlot({ heightScreenRatio, data, title }: RatioPlotProps) {
             }
         }
     }
-
 
     return (
         <div>

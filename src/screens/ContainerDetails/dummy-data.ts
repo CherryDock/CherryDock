@@ -17,82 +17,82 @@ export const lineDummyData = [
 ];
 
 export const ratioDummyData = [
-    {
+  {
+    id: 1,
+    title: "CPU consumption ratio",
+    data: [
+      {
         id: 1,
-        title: 'CPU consumption ratio',
-        data: [
-            {
-              id: 1,
-              label: "App-Backend",
-              value: 10,
-            },
-            {
-              id: 2,
-              label: "App-Frontend",
-              value: 20,
-            },
-            {
-              id: 3,
-              label: "ETL-Microservice",
-              value: 30,
-            },
-            {
-              id: 4,
-              label: "Unused",
-              value: 40,
-            },
-          ] 
-    },
-    {
+        label: "App-Backend",
+        value: 10,
+      },
+      {
         id: 2,
-        title: 'RAM consumption ratio',
-        data: [
-            {
-              id: 1,
-              label: "App-Backend",
-              value: 10,
-            },
-            {
-              id: 2,
-              label: "App-Frontend",
-              value: 20,
-            },
-            {
-              id: 3,
-              label: "ETL-Microservice",
-              value: 30,
-            },
-            {
-              id: 4,
-              label: "App-Backend",
-              value: 40,
-            },
-          ] 
-    },
-    {
+        label: "App-Frontend",
+        value: 20,
+      },
+      {
         id: 3,
-        title: 'Network consumption ratio',
-        data: [
-            {
-              id: 1,
-              label: "App-Backend",
-              value: 10,
-            },
-            {
-              id: 2,
-              label: "App-Frontend",
-              value: 20,
-            },
-            {
-              id: 3,
-              label: "ETL-Microservice",
-              value: 30,
-            },
-            {
-              id: 4,
-              label: "App-Backend",
-              value: 40,
-            },
-          ] 
-    }
+        label: "ETL-Microservice",
+        value: 30,
+      },
+      {
+        id: 4,
+        label: "Unused",
+        value: 40,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "RAM consumption ratio",
+    data: [
+      {
+        id: 1,
+        label: "App-Backend",
+        value: 10,
+      },
+      {
+        id: 2,
+        label: "App-Frontend",
+        value: 20,
+      },
+      {
+        id: 3,
+        label: "ETL-Microservice",
+        value: 30,
+      },
+      {
+        id: 4,
+        label: "App-Backend",
+        value: 40,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Network consumption ratio",
+    data: [
+      {
+        id: 1,
+        label: "App-Backend",
+        value: 10,
+      },
+      {
+        id: 2,
+        label: "App-Frontend",
+        value: 20,
+      },
+      {
+        id: 3,
+        label: "ETL-Microservice",
+        value: 30,
+      },
+      {
+        id: 4,
+        label: "App-Backend",
+        value: 40,
+      },
+    ],
+  },
 ];
