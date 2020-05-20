@@ -26,7 +26,7 @@ function ContainerDetails() {
     });
 
     return (
-        <div>
+        <div className={style.container}>
             <div className={style.actionButons}>
                 <ActionButtons />
             </div>

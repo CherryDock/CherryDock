@@ -1,4 +1,4 @@
-$button-background-color: #6fb2ed;
+$button-background-color: white;
 $button-color: #3e423f;
 
 .actionButtonsContainer {
@@ -11,10 +11,11 @@ $button-color: #3e423f;
       border-radius: 30px;
       padding: 1rem 2rem;
       border: none;
+      background-color: rgba($button-background-color, 0);
 
       &:hover {
           cursor: pointer;
-          background-color: rgba($button-background-color, .1);
+          background-color: rgba($button-background-color, .9);
           transform: scale(1.05);
       }
 
