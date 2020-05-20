@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
+import 'chartjs-plugin-datalabels';
 
 interface RatioPlotData {
     id: number;
@@ -39,12 +40,27 @@ function LinePlot({ heightScreenRatio, data, title }: RatioPlotProps) {
 
     const optionConf = {
         legend: {
-            display: false
+            display: true,
+            position: 'bottom'
         },
         title: {
             display: true,
             text: title,
             fontSize: 18
+        },
+        plugins: {
+            datalabels: {
+                display: true,
+                labels: {
+                    title: {
+                        font: {
+                            weight: 'bold',
+                            size: '18'
+                        },
+                        color: 'white'
+                    }
+                }
+            }
         }
     }
 
