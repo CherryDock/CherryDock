@@ -59,7 +59,7 @@ func SingleMonitoring(containerId string) []byte {
 	return json_utils.FormatToJson(containerInfo)
 }
 
-func GlobalMonitoring() []byte {
+func GlobalMonitoring() *GlobalStats {
 	// Extract running containers id
 	runningContainers := ContainersId(false)
 
@@ -117,7 +117,7 @@ func GlobalMonitoring() []byte {
 		containerInfo,
 	}
 
-	return json_utils.FormatToJson(globalStats)
+	return &globalStats
 }
 
 type ContainerStats struct {
