@@ -1,6 +1,7 @@
 package endpoints
 
 import (
+	"github.com/CherryDock/CherryDock/api/database"
 	"github.com/CherryDock/CherryDock/api/docker/actions"
 	"github.com/CherryDock/CherryDock/api/docker/monitoring"
 	"github.com/CherryDock/CherryDock/api/jsonutils"
@@ -95,4 +96,10 @@ func getLogs(w http.ResponseWriter, r *http.Request) {
 			w.Write(logs)
 		}
 	}
+}
+
+func historicDataHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
+	data := database.DbClient.RetrieveData()
+	w.Write(jsonutils.FormatToJson(&data))
 }
