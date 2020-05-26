@@ -1,8 +1,10 @@
 package endpoints
 
 import (
+	"github.com/CherryDock/CherryDock/api/database"
 	"github.com/CherryDock/CherryDock/api/docker/actions"
 	"github.com/CherryDock/CherryDock/api/docker/monitoring"
+	"github.com/CherryDock/CherryDock/api/jsonutils"
 	"net/http"
 )
 
@@ -69,8 +71,9 @@ func monitor(w http.ResponseWriter, r *http.Request) {
 
 func monitorAll(w http.ResponseWriter, r *http.Request) {
 	globalStats := monitoring.GlobalMonitoring()
+	jsonStats := jsonutils.FormatToJson(*globalStats)
 	w.Header().Set("content-type", "application/json")
-	w.Write(globalStats)
+	w.Write(jsonStats)
 }
 
 func getContainersInfoJson(w http.ResponseWriter, r *http.Request) {
@@ -93,4 +96,10 @@ func getLogs(w http.ResponseWriter, r *http.Request) {
 			w.Write(logs)
 		}
 	}
+}
+
+func historicDataHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("content-type", "application/json")
+	data := database.DbClient.RetrieveData()
+	w.Write(jsonutils.FormatToJson(&data))
 }

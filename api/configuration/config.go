@@ -10,7 +10,7 @@ type Configuration struct {
 	} `yaml:"server"`
 }
 
-func LoadConfig(path string) Configuration {
+func LoadConfig(path string) *Configuration {
 	file, err := os.Open(path)
 
 	if err != nil {
@@ -27,5 +27,5 @@ func LoadConfig(path string) Configuration {
 		os.Stderr.WriteString(err.Error())
 	}
 
-	return cfg
+	return &cfg
 }
