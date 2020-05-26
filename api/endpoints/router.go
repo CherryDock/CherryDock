@@ -17,6 +17,7 @@ func Routing() *mux.Router {
 	router.Handle("/api/monitor/logs", jwt.CheckToken(http.HandlerFunc(getLogs)))
 	router.Handle("/api/monitor/stats", jwt.CheckToken(http.HandlerFunc(monitorAll)))
 	router.Handle("/api/monitor/stat", jwt.CheckToken(http.HandlerFunc(monitor)))
+	router.Handle("/api/monitor/historic", jwt.CheckToken(http.HandlerFunc(historicDataHandler)))
 
 	// Actions routes
 	router.Handle("/api/action/stop-all", jwt.CheckToken(http.HandlerFunc(stopAll)))
