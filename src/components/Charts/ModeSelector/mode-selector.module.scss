@@ -1,0 +1,54 @@
+$space-from-switch: 1.2rem;
+$space-from-icon: .8rem;
+$label-font-size: .8rem;
+
+.switchContainer {
+  display: flex;
+  align-items: center;
+
+  .realTimeContainer {
+    display: flex;
+    align-items: center;
+    margin-right: $space-from-switch;
+
+    .label {
+        font-size: $label-font-size;
+    }
+
+    .labelSelected {
+        opacity: 1;
+    }
+
+    .labelUnselected {
+        opacity: .3;
+    }
+
+    .icon {
+      margin-left: $space-from-icon;
+    }
+  }
+
+  .historyContainer {
+    display: flex;
+    align-items: center;
+    margin-left: $space-from-switch;
+
+    .label {
+      margin-left: $space-from-icon;
+      font-size: $label-font-size;
+    }
+
+    .labelSelected {
+        opacity: 1;
+    }
+
+    .labelUnselected {
+        opacity: .3;
+    }
+  }
+
+  .switch {
+    display: flex;
+    align-items: center;
+  }
+}

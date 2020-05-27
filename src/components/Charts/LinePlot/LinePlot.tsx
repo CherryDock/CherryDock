@@ -1,5 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import style from './line-plot.module.scss';
+import ModeSelector from '../ModeSelector/ModeSelector';
 
 interface LinePlotProps {
     heightScreenRatio: number;
@@ -17,7 +19,7 @@ function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
             display: false
         },
         title: {
-            display: true,
+            display: false,
             text: title,
             fontSize: 18
         }
@@ -51,7 +53,11 @@ function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
     };
 
     return (
-        <div>
+        <div className={style.container}>
+            <p className={style.title}>{title}</p>
+            <div className={style.modeSelector}>
+                <ModeSelector />
+            </div>
             <Line
                 data={dataConf}
                 height={PlotHeight}

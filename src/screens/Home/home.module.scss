@@ -5,8 +5,34 @@ $primary-text-color: #3e423f;
   background-color: $background-screen-color;
   height: 100%;
   padding: 1rem 2rem;
-}
 
-.screenName {
-  color: $primary-text-color;
+  .screenName {
+    color: $primary-text-color;
+  }
+
+  .containerStats {
+    padding: 2rem 2rem;
+
+    .lineStats {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .plot {
+        flex: 0 0 32%;
+        margin-bottom: 0rem;
+      }
+    }
+
+    .ratioStats {
+      margin-top: 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      .plot {
+        flex: 0 0 32%;
+        margin-bottom: 0rem;
+      }
+    }
+  }
 }
