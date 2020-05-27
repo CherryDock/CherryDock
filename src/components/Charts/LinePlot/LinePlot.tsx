@@ -7,9 +7,10 @@ interface LinePlotProps {
     heightScreenRatio: number;
     data: number[];
     title: string;
+    labels: string[];
 }
 
-function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
+function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
 
     const screenHeight = window.innerHeight;
     const PlotHeight = screenHeight * heightScreenRatio;
@@ -26,7 +27,7 @@ function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
     }
 
     const dataConf = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: labels,
         datasets: [
             {
                 label: 'My First dataset',

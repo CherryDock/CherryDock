@@ -12,7 +12,7 @@ function ContainerDetails() {
     const displayLineChart = lineDummyData.map(data => {
         return (
             <div key={data.id} className={style.plot}>
-                <LinePlot heightScreenRatio={0.35} data={data.data} title={data.title} />
+                <LinePlot heightScreenRatio={0.35} data={data.data} title={data.title} labels={data.labels} />
             </div>
         )
     });
