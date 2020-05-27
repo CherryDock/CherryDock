@@ -3,16 +3,19 @@ export const lineDummyData = [
     id: 1,
     data: [65, 59, 80, 81, 56, 55, 40],
     title: "CPU",
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
   },
   {
     id: 2,
     data: [65, 59, 80, 81, 56, 55, 40],
     title: "RAM",
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
   },
   {
     id: 3,
     data: [65, 59, 80, 81, 56, 55, 40],
-    title: "Network",
+    title: "NETWORK",
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July']
   },
 ];
 

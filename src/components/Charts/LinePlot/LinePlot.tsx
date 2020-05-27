@@ -1,13 +1,16 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import style from './line-plot.module.scss';
+import ModeSelector from '../ModeSelector/ModeSelector';
 
 interface LinePlotProps {
     heightScreenRatio: number;
     data: number[];
     title: string;
+    labels: string[];
 }
 
-function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
+function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
 
     const screenHeight = window.innerHeight;
     const PlotHeight = screenHeight * heightScreenRatio;
@@ -17,14 +20,14 @@ function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
             display: false
         },
         title: {
-            display: true,
+            display: false,
             text: title,
             fontSize: 18
         }
     }
 
     const dataConf = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: labels,
         datasets: [
             {
                 label: 'My First dataset',
@@ -51,7 +54,11 @@ function LinePlot({ heightScreenRatio, data, title }: LinePlotProps) {
     };
 
     return (
-        <div>
+        <div className={style.container}>
+            <p className={style.title}>{title}</p>
+            <div className={style.modeSelector}>
+                <ModeSelector />
+            </div>
             <Line
                 data={dataConf}
                 height={PlotHeight}

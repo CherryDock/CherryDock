@@ -2,20 +2,20 @@ $background-screen-color: #f2f3f5;
 
 .container {
   background-color: $background-screen-color;
-}
 
-.actionButons {
-  padding-top: 2rem;
-}
+  .actionButons {
+    padding-top: 2rem;
+  }
 
-.containerStats {
-  padding: 2rem 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  .containerStats {
+    padding: 2rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  .plot {
-    flex: 0 0 32%;
-    margin-bottom: 2rem;
+    .plot {
+      flex: 0 0 32%;
+      margin-bottom: 2rem;
+    }
   }
 }
