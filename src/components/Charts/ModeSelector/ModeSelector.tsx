@@ -44,6 +44,13 @@ function ModeSelector() {
                 <i className={cx("fas fa-history", style.icon)}></i>
                 <span className={cx(style.label, historyLabelStyle)}>History</span>
             </div>
+            <button className={style.expandButton}>
+                <div className={style.toolTip}>
+                    <i className={cx("far fa-question-circle", style.icon)}></i>
+                    <span className={style.toolTipText}>Full screen mode</span>
+                </div>
+                <i className={cx("fas fa-expand", style.icon)}></i>
+            </button>
         </div>
     )
 }

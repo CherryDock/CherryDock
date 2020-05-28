@@ -1,6 +1,6 @@
 $space-from-switch: 1.2rem;
-$space-from-icon: .8rem;
-$label-font-size: .8rem;
+$space-from-icon: 0.8rem;
+$label-font-size: 0.8rem;
 
 .switchContainer {
   display: flex;
@@ -12,15 +12,15 @@ $label-font-size: .8rem;
     margin-right: $space-from-switch;
 
     .label {
-        font-size: $label-font-size;
+      font-size: $label-font-size;
     }
 
     .labelSelected {
-        opacity: 1;
+      opacity: 1;
     }
 
     .labelUnselected {
-        opacity: .3;
+      opacity: 0.3;
     }
 
     .icon {
@@ -39,16 +39,62 @@ $label-font-size: .8rem;
     }
 
     .labelSelected {
-        opacity: 1;
+      opacity: 1;
     }
 
     .labelUnselected {
-        opacity: .3;
+      opacity: 0.3;
     }
   }
 
   .switch {
     display: flex;
     align-items: center;
+  }
+
+  .expandButton {
+    margin-left: 1rem;
+    border: none;
+    background-color: rgba(white, 0);
+    position: relative;
+
+    &:hover {
+      .toolTip {
+        visibility: visible;
+      }
+    }
+
+    .toolTip {
+      display: flex;
+      align-items: center;
+      visibility: hidden;
+      width: 120px;
+      background-color: rgba(black, 0.8);
+      color: #fff;
+      text-align: center;
+      padding: .5rem .5rem;
+      border-radius: 6px;
+
+      /* Position the tooltip text - see examples below! */
+      position: absolute;
+      z-index: 1;
+      top: -2.5rem;
+      left: -1rem;
+
+      .icon {
+
+      }
+
+      .toolTipText {
+          margin-left: .5rem;
+      }
+    }
+
+    .icon {
+      font-size: 1.2rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
 }
