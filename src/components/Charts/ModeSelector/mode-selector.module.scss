@@ -70,9 +70,8 @@ $label-font-size: 0.8rem;
       visibility: hidden;
       width: 120px;
       background-color: rgba(black, 0.8);
-      color: #fff;
       text-align: center;
-      padding: .5rem .5rem;
+      padding: 0.5rem 0.5rem;
       border-radius: 6px;
 
       /* Position the tooltip text - see examples below! */
@@ -82,18 +81,24 @@ $label-font-size: 0.8rem;
       left: -1rem;
 
       .icon {
-
+        color: rgba(white, 0.9);
+        font-size: .9rem;
       }
 
       .toolTipText {
-          margin-left: .5rem;
+        color: rgba(white, 0.9);
+        margin-left: 0.5rem;
       }
     }
 
     .icon {
       font-size: 1.2rem;
+      color: rgba(black, 0.6);
+
       &:hover {
         cursor: pointer;
+        transform: scale(1.1);
+        color: rgba(black, 0.9);
       }
     }
   }
