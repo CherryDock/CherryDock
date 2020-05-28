@@ -1,11 +1,5 @@
 package monitoring
 
-type MemoryInfo struct {
-	MemoryUsage        float64
-	Limit              float64
-	UtilizationPercent float64
-}
-
 func getMemoryInfo(stats DockerStats) MemoryInfo {
 	memoryStats := stats.MemoryStats
 

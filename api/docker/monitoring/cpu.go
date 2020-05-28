@@ -1,10 +1,5 @@
 package monitoring
 
-type CpuInfo struct {
-	NbCpu      int
-	CpuPercent float64
-}
-
 func getCpuInfo(stats DockerStats) CpuInfo {
 
 	cpuStats := stats.CPUStats

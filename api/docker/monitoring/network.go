@@ -4,27 +4,6 @@ import (
 	"math"
 )
 
-type (
-	NetworkInfo struct {
-		In struct {
-			Value float64
-			Unit  string
-		}
-		Out struct {
-			Value float64
-			Unit  string
-		}
-	}
-	Rx struct {
-		Value float64
-		Unit  string
-	}
-	Tx struct {
-		Value float64
-		Unit  string
-	}
-)
-
 func networkStats(stats DockerStats) NetworkInfo {
 	rx, rxUnit := convertNetworkStat(float64(stats.Networks.Eth0.RxBytes))
 	tx, txUnit := convertNetworkStat(float64(stats.Networks.Eth0.TxBytes))
