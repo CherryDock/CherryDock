@@ -72,7 +72,6 @@ function Containers() {
             }
             else return container;
         });
-        console.log(containersWithSelectionReset);
         setContainers(containersWithSelectionReset);
     }
 
