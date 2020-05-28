@@ -4,6 +4,10 @@ import LinePlot from '../../components/Charts/LinePlot/LinePlot';
 import RatioPlot from '../../components/Charts/RatioPlot/RatioPlot';
 import { lineDummyData, ratioDummyData } from './../ContainerDetails/dummy-data';
 
+/*
+    token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY2ODkxNDUsInVzZXIiOiIifQ._nUdbYxWsBI-clzFr16M30D4zyvUu7-SRsAfVisZvLg
+*/
+
 function Home() {
     const displayLineChart = lineDummyData.map(data => {
         return (
