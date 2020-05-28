@@ -31,12 +31,9 @@ function LinePlot({ heightScreenRatio, data, title }: RatioPlotProps) {
 
     for (let index = 0; index < numOfSlices; index++) {
         const colorIndex = index % colorsPalette.length;
-        console.log(colorIndex);
         colors.push(colorsPalette[colorIndex]);
         colorsHover.push(colorsPaletteHover[colorIndex])
     }
-
-    console.log(colors);
 
     const dataConf = {
         labels: labels,

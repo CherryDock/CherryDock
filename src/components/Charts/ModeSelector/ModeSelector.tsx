@@ -16,7 +16,6 @@ function ModeSelector() {
     const instantColor = "#838485"
 
     function handleChange(checked: boolean) {
-        console.log(checked);
         sethistoryMode(checked);
     }
 

@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './home.module.scss';
 import LinePlot from '../../components/Charts/LinePlot/LinePlot';
 import RatioPlot from '../../components/Charts/RatioPlot/RatioPlot';
 import { lineDummyData, ratioDummyData } from './../ContainerDetails/dummy-data';
-
-/*
-    token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY2ODkxNDUsInVzZXIiOiIifQ._nUdbYxWsBI-clzFr16M30D4zyvUu7-SRsAfVisZvLg
-*/
+import { RTGlobalContainersStats } from '../../interfaces/data.interface';
+import { fetchDataApi } from '../../utils/api-fetch';
+import apiConf from '../../conf/api';
 
 function Home() {
+    const [realTimeStats, setRealTimeStats] = useState<RTGlobalContainersStats>();
+
+    useEffect(() => {
+        const rtStatsRoute = apiConf.find(route => route.name === 'GET-ALL-RT-CTN-STATS')?.route!;
+        const rtStats = fetchDataApi<RTGlobalContainersStats>(rtStatsRoute)
+        console.log(rtStats);
+    }, [])
+
     const displayLineChart = lineDummyData.map(data => {
         return (
             <div key={data.id} className={style.plot}>
