@@ -2,13 +2,7 @@ import React from 'react';
 import { Line } from 'react-chartjs-2';
 import style from './line-plot.module.scss';
 import ModeSelector from '../ModeSelector/ModeSelector';
-
-interface LinePlotProps {
-    heightScreenRatio: number;
-    data: number[];
-    title: string;
-    labels: string[];
-}
+import { LinePlotProps } from '../../../interfaces/charts.interface';
 
 function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
 

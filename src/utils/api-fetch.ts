@@ -1,18 +1,27 @@
 import axios from "axios";
+import apiConf from "../conf/api.conf";
+import {
+  GlobalContainers,
+  HistGlobalContainers,
+  Container,
+} from "../interfaces/data.interface";
 
-const apiServer = "http://0.0.0.0";
-const port = "8001";
-const apiToken =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjY2ODkxNDUsInVzZXIiOiIifQ._nUdbYxWsBI-clzFr16M30D4zyvUu7-SRsAfVisZvLg";
+const globalContainersData = require("../conf/specs-json/rt-global-ctn-stats.json");
+const containerData = require("../conf/specs-json/rt-single-ctn-stats.json");
+const historicData = require("../conf/specs-json/historic-global-ctn-stats.json");
+const containersInfo = require("../conf/specs-json/containers-info.json");
 
 /**
  * Fetch data from the API
  * @param apiRoute - API route
  */
 async function fetchDataApi<T>(apiRoute: string): Promise<T | null> {
-  const apiUrl = apiServer + ":" + port + apiRoute;
+  const apiUrl = apiRoute;
+
   const apiConfig = {
-    headers: { Authorization: `Bearer ${apiToken}` },
+    headers: {
+      Authorization: `Bearer ${apiConf.apiToken}`,
+    },
   };
 
   try {
@@ -25,4 +34,13 @@ async function fetchDataApi<T>(apiRoute: string): Promise<T | null> {
   }
 }
 
-export { fetchDataApi };
+
+/**
+ * Dummy data simulating fetching the API
+ * @param jsonName - Name of the json file
+ */
+async function fetchGlobalContainers(apiRoute: string): Promise<GlobalContainers> {
+  return globalContainersData;
+}
+
+export { fetchDataApi, fetchGlobalContainers };

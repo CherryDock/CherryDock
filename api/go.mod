@@ -15,6 +15,7 @@ require (
 	github.com/gorilla/mux v1.7.4
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
+	github.com/rs/cors v1.7.0
 	golang.org/x/net v0.0.0-20200425230154-ff2c4b7c35a0 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 )

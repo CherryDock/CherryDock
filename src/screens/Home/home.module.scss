@@ -17,10 +17,10 @@ $primary-text-color: #3e423f;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: space-evenly;
       .plot {
-        flex: 0 0 32%;
-        margin-bottom: 0rem;
+        // flex: 0 0 32%;
+        // margin-bottom: 0rem;
       }
     }
 

@@ -3,23 +3,76 @@ import style from './home.module.scss';
 import LinePlot from '../../components/Charts/LinePlot/LinePlot';
 import RatioPlot from '../../components/Charts/RatioPlot/RatioPlot';
 import { lineDummyData, ratioDummyData } from './../ContainerDetails/dummy-data';
-import { RTGlobalContainersStats } from '../../interfaces/data.interface';
 import { fetchDataApi } from '../../utils/api-fetch';
-import apiConf from '../../conf/api';
+import apiConf from '../../conf/api.conf';
+import { linePlotConf } from '../../conf/charts.conf';
+import Axios from 'axios';
+import { LinePlotProps, LinePlotData } from '../../interfaces/charts.interface';
+import { makeLinePlotItem } from '../../utils/containers-data-processing';
+import { GlobalContainers } from '../../interfaces/data.interface';
+import { fetchGlobalContainers } from '../../utils/api-fetch';
 
 function Home() {
-    const [realTimeStats, setRealTimeStats] = useState<RTGlobalContainersStats>();
+    const [realTimeStats, setRealTimeStats] = useState<GlobalContainers>();
+    const [linePlotData, setLinePlotData] = useState<LinePlotData[]>([]);
+
+    /**
+     * Init linePlotData
+     */
+    function initLinePlotData() {
+        fetchGlobalContainers('/api/monitor/stats')
+            .then(data => {
+                if (data != undefined) {
+                    let id = 1;
+                    linePlotConf.forEach(plotConf => {
+                        const dataItem = [makeLinePlotItem(data, plotConf.kpiName)!];
+                        const plotData: LinePlotData = {
+                            id, title: plotConf.title, data: dataItem
+                        }
+                        id++;
+                        setLinePlotData(emptyArray => [...emptyArray, plotData]);
+                    })
+                }
+            });
+    }
+
+    /**
+     * Update linePlotData
+     */
+    function updateLinePlotData() {
+        console.log("Update - Data: ", linePlotData);
+        /* API call */
+        const rtStatsRoute = apiConf.routes.find(route => route.name === 'GET-ALL-RT-CTN-STATS')?.route!;
+        //fetchDataApi<GlobalContainers>(rtStatsRoute)
+        fetchGlobalContainers('/api/monitor/stats')
+            .then(data => {
+                if (data != undefined) {
+                    const updatedLinePlotData = linePlotData.map(plotData => {
+                        const plotTitle = plotData.title;
+                        const kpiName = linePlotConf.find(plotConf => plotConf.title === plotTitle)?.kpiName!;
+                        const dataItem = makeLinePlotItem(data, kpiName);
+                        if (dataItem != undefined)
+                            plotData.data.push(dataItem)
+                        return plotData;
+                    });
+                    setLinePlotData(updatedLinePlotData);
+                }
+            });
+    }
 
     useEffect(() => {
-        const rtStatsRoute = apiConf.find(route => route.name === 'GET-ALL-RT-CTN-STATS')?.route!;
-        const rtStats = fetchDataApi<RTGlobalContainersStats>(rtStatsRoute)
-        console.log(rtStats);
+        initLinePlotData();
     }, [])
 
-    const displayLineChart = lineDummyData.map(data => {
+
+    const displayLineChart = linePlotData.map(kpi => {
         return (
-            <div key={data.id} className={style.plot}>
-                <LinePlot heightScreenRatio={0.35} data={data.data} title={data.title} labels={data.labels} />
+            <div key={kpi.id} className={style.plot}>
+                <LinePlot
+                    heightScreenRatio={0.35}
+                    title={kpi.title}
+                    data={kpi.data.map(item => item.value)}
+                    labels={kpi.data.map(item => item.label)} />
             </div>
         )
     });
@@ -31,18 +84,19 @@ function Home() {
             </div>
         )
     });
+
     return (
         <div className={style.container}>
             <div className={style.containerStats}>
                 <div className={style.lineStats}>
                     {displayLineChart}
                 </div>
-                <div className={style.ratioStats}>
+                {/* <div className={style.ratioStats}>
                     {displayRatioPlot}
-                </div>
+                </div> */}
             </div>
         </div>
     )
 }
 
-export default Home
+export default Home;

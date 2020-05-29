@@ -1,0 +1,30 @@
+{
+  "Id": "f924af8e48",
+  "Info": [
+    {
+      "name": "CpuUsage",
+      "value": 0,
+      "unit": "%"
+    },
+    {
+      "name": "MemoryUsage",
+      "value": 0.3885715630737364,
+      "unit": "%"
+    },
+    {
+      "name": "Memory",
+      "value": 7.73828125,
+      "unit": "MiB"
+    },
+    {
+      "name": "NetworkInfoIn",
+      "value": 9.52,
+      "unit": "Kb"
+    },
+    {
+      "name": "NetworkInfoOut",
+      "value": 1.785,
+      "unit": "Kb"
+    }
+  ]
+}
