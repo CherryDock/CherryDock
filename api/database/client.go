@@ -2,20 +2,23 @@ package database
 
 import (
 	"encoding/json"
-	"github.com/CherryDock/CherryDock/api/docker/monitoring"
-	"github.com/boltdb/bolt"
 	"log"
 	"time"
+
+	"github.com/CherryDock/CherryDock/api/docker/monitoring"
+	"github.com/boltdb/bolt"
 )
 
 var DbClient BoltDb
 
+// Client interface
 type BoltDb interface {
 	Init()
 	RetrieveData() *[]Data
 	AddMonitoringInfo(info *monitoring.GlobalStats) error
 }
 
+// Client is
 type Client struct {
 	boltDb *bolt.DB
 }
@@ -29,7 +32,7 @@ func (client *Client) Init() {
 	var err error
 	client.boltDb, err = bolt.Open("cherrydock.db", 384, nil)
 	if err != nil {
-		log.Printf("fail to open db", err)
+		log.Printf("fail to open db %v", err)
 	}
 
 	err = client.boltDb.Update(func(tx *bolt.Tx) error {
