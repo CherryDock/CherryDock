@@ -1,0 +1,25 @@
+{
+    "Name": [
+        "/mysql",
+        "/phpmyadmin/db"
+    ],
+    "Status": "Exited (255) 2 hours ago",
+    "Id": "435516a604",
+    "Image": "mysql:latest",
+    "Command": "docker-entrypoint.sh mysqld",
+    "Created": 1590079811,
+    "Ports": [
+        {
+            "IP": "",
+            "PrivatePort": 33060,
+            "PublicPort": null,
+            "Type": "tcp"
+        },
+        {
+            "IP": "0.0.0.0",
+            "PrivatePort": 3306,
+            "PublicPort": 3306,
+            "Type": "tcp"
+        }
+    ]
+}

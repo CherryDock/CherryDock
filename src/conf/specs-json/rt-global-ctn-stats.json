@@ -1,0 +1,62 @@
+{
+  "GlobalInfo": [
+    {
+      "name": "RunningContainers",
+      "value": 1,
+      "unit": ""
+    },
+    {
+      "name": "NbCpu",
+      "value": 2,
+      "unit": ""
+    },
+    {
+      "name": "MemoryLimit",
+      "value": 1.944793701171875,
+      "Unit": "GiB"
+    },
+    {
+      "name": "MemoryUsage",
+      "value": 0.3885715630737364,
+      "unit": "%"
+    },
+    {
+      "name": "CpuUsage",
+      "value": 0,
+      "unit": "%"
+    }
+  ],
+
+  "Containers": [
+    {
+      "Id": "f924af8e48",
+      "Info": [
+        {
+          "name": "CpuUsage",
+          "value": 0,
+          "unit": "%"
+        },
+        {
+          "name": "MemoryUsage",
+          "value": 0.3885715630737364,
+          "unit": "%"
+        },
+        {
+          "name": "Memory",
+          "value": 7.73828125,
+          "unit": "MiB"
+        },
+        {
+          "name": "NetworkInfoIn",
+          "value": 9.52,
+          "unit": "Kb"
+        },
+        {
+          "name": "NetworkInfoOut",
+          "value": 1.785,
+          "unit": "Kb"
+        }
+      ]
+    }
+  ]
+}

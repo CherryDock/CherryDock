@@ -1,55 +1,38 @@
-interface Port {
-    IP: string;
-    PrivatePort: number;
-    PublicPort: number;
-    Type: string
+export interface Info {
+  name: string;
+  value: number;
+  unit: string;
 }
 
 export interface Container {
-    Name: string[];
-    Status: string;
-    Image: string;
-    Command: string;
-    Created: number;
-    Ports: Port[]
+  Id: string;
+  Info: Info[];
 }
 
-export interface Containers extends Array<Container>{}
-
-interface StatsInfoValue {
-    Value: number;
-    Unit: string;
+export interface GlobalContainers {
+  GlobalInfo: Info[];
+  Containers: Container[];
 }
 
-interface NetworkInfo {
-    In: StatsInfoValue;
-    Out: StatsInfoValue;
+export interface HistGlobalContainers {
+  Date: Date;
+  GlobalInfo: Info[];
+  Containers: Container[];
 }
 
-interface StatsInfo {
-    CpuUsagePercent: number;
-    MemoryUsagePercent: number;
-    Memory: StatsInfoValue;
-    NetworkInfo: NetworkInfo;
+export interface Port {
+  IP: string;
+  PrivatePort: number;
+  PublicPort: number;
+  Type: string;
 }
 
-export interface RTContainerStats {
-    Id: string;
-    Info: StatsInfo;
+export interface ContainerInfo {
+  Name: string[];
+  Status: string;
+  Id: string;
+  Image: string;
+  Command: string;
+  Created: number;
+  Ports: Port[];
 }
-
-export interface RTGlobalContainersStats {
-    RunningContainers: number;
-    NbCpu: number;
-    MemoryLimit: StatsInfoValue;
-    MemoryUsagePercent: number;
-    CpuUsagePercent: number;
-    Containers: RTContainerStats[];
-}
-
-export interface HistoricGlobalContainersStats {
-    Date: string;
-    Stats: RTGlobalContainersStats;
-}
-
-export interface HistoricGlobalContainersStatsList extends Array<HistoricGlobalContainersStats>{}
