@@ -17,6 +17,14 @@ function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
             display: false,
             text: title,
             fontSize: 18
+        },
+        tooltips: {
+            enabled: false,
+        },
+        elements: {
+            point: {
+                borderColor: 'rgba(168, 50, 104, 1)'
+            }
         }
     }
 
@@ -24,7 +32,6 @@ function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
         labels: labels,
         datasets: [
             {
-                label: 'My First dataset',
                 fill: false,
                 lineTension: 0.1,
                 backgroundColor: 'rgba(75,192,192,0.4)',
@@ -34,7 +41,7 @@ function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
                 borderDashOffset: 0.0,
                 borderJoinStyle: 'miter',
                 pointBorderColor: 'rgba(75,192,192,1)',
-                pointBackgroundColor: '#fff',
+                pointBackgroundColor: 'rgba(168, 50, 104, 1)',
                 pointBorderWidth: 1,
                 pointHoverRadius: 5,
                 pointHoverBackgroundColor: 'rgba(75,192,192,1)',
@@ -43,23 +50,25 @@ function LinePlot({ heightScreenRatio, data, labels, title }: LinePlotProps) {
                 pointRadius: 1,
                 pointHitRadius: 10,
                 data: data
-            }
+            },
+
         ]
     };
 
-    return (
-        <div className={style.container}>
-            <p className={style.title}>{title}</p>
-            <div className={style.modeSelector}>
-                <ModeSelector />
-            </div>
-            <Line
-                data={dataConf}
-                height={PlotHeight}
-                options={optionConf}
-            />
+
+return (
+    <div className={style.container}>
+        <p className={style.title}>{title}</p>
+        <div className={style.modeSelector}>
+            <ModeSelector />
         </div>
-    )
+        <Line
+            data={dataConf}
+            height={PlotHeight}
+            options={optionConf}
+        />
+    </div>
+)
 }
 
 export default LinePlot

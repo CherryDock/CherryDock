@@ -17,9 +17,9 @@ $primary-text-color: #3e423f;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
-      justify-content: space-evenly;
+      justify-content: space-around;
       .plot {
-        // flex: 0 0 32%;
+        flex: 0 0 40%;
         // margin-bottom: 0rem;
       }
     }

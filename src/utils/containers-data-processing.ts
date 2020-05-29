@@ -24,7 +24,9 @@ function makeLinePlotItem(
 ): LinePlotItem | undefined {
   const kpi = fetchedData.GlobalInfo.find((kpi) => kpi.name === kpiName);
   if (kpi !== undefined) {
-    const value = Number(kpi.value.toFixed(2));
+    //const value = Number(kpi.value.toFixed(2));
+    let value = 50 + Math.random() * 3;
+    value = Number(value.toFixed(2));
     const label = makeAcqTime();
     return { value, label };
   } else return undefined;

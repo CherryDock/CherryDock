@@ -64,6 +64,13 @@ function Home() {
         initLinePlotData();
     }, [])
 
+    useEffect(() => {
+        const scheduledUpdate = setTimeout(() => {
+            updateLinePlotData();
+        }, 3000);
+        return () => clearTimeout(scheduledUpdate);
+    }, [linePlotData])
+
 
     const displayLineChart = linePlotData.map(kpi => {
         return (
