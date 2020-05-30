@@ -5,25 +5,12 @@ import ActionButtons from '../../components/ContainerDetails/ActionButtons/Actio
 import LinePlot from '../../components/Charts/LinePlot/LinePlot';
 import RatioPlot from '../../components/Charts/RatioPlot/RatioPlot';
 import { lineDummyData, ratioDummyData } from './dummy-data';
+import LinePlotsManager from '../../components/ChartsManagers/LinePlotsManager/LinePlotsManager';
+import { fetchSingleContainer } from '../../utils/api-fetch';
+import { makeSingleCtnItem } from '../../utils/containers-data-processing';
 
 function ContainerDetails() {
     const { id } = useParams();
-
-    const displayLineChart = lineDummyData.map(data => {
-        return (
-            <div key={data.id} className={style.plot}>
-                <LinePlot heightScreenRatio={0.35} data={data.data} title={data.title} labels={data.labels} />
-            </div>
-        )
-    });
-
-    const displayRatioPlot = ratioDummyData.map(data => {
-        return (
-            <div key={data.id} className={style.plot}>
-                <RatioPlot heightScreenRatio={0.35} data={data.data} title={data.title} />
-            </div>
-        )
-    });
 
     return (
         <div className={style.container}>
@@ -31,8 +18,13 @@ function ContainerDetails() {
                 <ActionButtons />
             </div>
             <div className={style.containerStats}>
-                {displayLineChart}
-                {displayRatioPlot}
+                <div className={style.lineStats}>
+                    <LinePlotsManager
+                        realTimeLimit={10}
+                        fetchData={fetchSingleContainer}
+                        makePlotItem={makeSingleCtnItem}
+                    />
+                </div>
             </div>
         </div>
     )

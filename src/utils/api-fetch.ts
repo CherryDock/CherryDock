@@ -49,7 +49,7 @@ async function fetchGlobalContainers(): Promise<GlobalContainers>{
  * @param jsonName - Name of the json file
  */
 async function fetchSingleContainer(): Promise<Container> {
-  return globalContainersData;
+  return containerData;
 }
 
 

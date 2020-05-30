@@ -1,4 +1,4 @@
-import { GlobalContainers } from "../interfaces/data.interface";
+import { GlobalContainers, Container } from "../interfaces/data.interface";
 import { LinePlotItem } from "../interfaces/charts.interface";
 
 /**
@@ -22,7 +22,7 @@ function makeGlobalCtnItem(
   fetchedData: GlobalContainers,
   kpiName: string
 ): LinePlotItem | undefined {
-  const kpi = fetchedData.GlobalInfo.find((kpi) => kpi.name === kpiName);
+  const kpi = fetchedData.GlobalInfo.find(kpi => kpi.name === kpiName);
   if (kpi !== undefined) {
     //const value = Number(kpi.value.toFixed(2));
     let value = 50 + Math.random() * 3;
@@ -32,4 +32,22 @@ function makeGlobalCtnItem(
   } else return undefined;
 }
 
-export { makeGlobalCtnItem };
+/**
+ * Get real-time data of a specific KPI from the single Container Data
+ * @param fetchedData
+ */
+function makeSingleCtnItem(
+  fetchedData: Container,
+  kpiName: string
+): LinePlotItem | undefined {
+  const kpi = fetchedData.Info.find(kpi => kpi.name === kpiName);
+  if (kpi !== undefined) {
+    let value = 50 + Math.random() * 3;
+    value = Number(value.toFixed(2));
+    const label = makeAcqTime();
+    return { value, label };
+  } else return undefined;
+}
+
+export { makeGlobalCtnItem, makeSingleCtnItem };
+
