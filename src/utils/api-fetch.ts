@@ -5,6 +5,7 @@ import {
   HistGlobalContainers,
   Container,
 } from "../interfaces/data.interface";
+import { SingleOrAllCnts } from "../types/data.types";
 
 const globalContainersData = require("../conf/specs-json/rt-global-ctn-stats.json");
 const containerData = require("../conf/specs-json/rt-single-ctn-stats.json");
@@ -39,8 +40,17 @@ async function fetchDataApi<T>(apiRoute: string): Promise<T | null> {
  * Dummy data simulating fetching the API
  * @param jsonName - Name of the json file
  */
-async function fetchGlobalContainers(apiRoute: string): Promise<GlobalContainers> {
+async function fetchGlobalContainers(): Promise<GlobalContainers>{
   return globalContainersData;
 }
 
-export { fetchDataApi, fetchGlobalContainers };
+/**
+ * Dummy data simulating fetching the API
+ * @param jsonName - Name of the json file
+ */
+async function fetchSingleContainer(): Promise<Container> {
+  return globalContainersData;
+}
+
+
+export { fetchDataApi, fetchGlobalContainers, fetchSingleContainer };
