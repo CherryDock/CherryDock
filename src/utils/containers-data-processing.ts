@@ -18,7 +18,7 @@ function makeAcqTime(): string {
  * Get real-time data of a specific KPI from the Global Containers Data
  * @param fetchedData
  */
-function makeLinePlotItem(
+function makeGlobalCtnItem(
   fetchedData: GlobalContainers,
   kpiName: string
 ): LinePlotItem | undefined {
@@ -32,4 +32,4 @@ function makeLinePlotItem(
   } else return undefined;
 }
 
-export { makeLinePlotItem };
+export { makeGlobalCtnItem };
