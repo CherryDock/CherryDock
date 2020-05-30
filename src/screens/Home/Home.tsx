@@ -7,7 +7,7 @@ import { fetchDataApi } from '../../utils/api-fetch';
 import apiConf from '../../conf/api.conf';
 import { linePlotConf } from '../../conf/charts.conf';
 import Axios from 'axios';
-import { LinePlotProps, LinePlotData } from '../../interfaces/charts.interface';
+import { LinePlotProps, LinePlotData, LinePlotItem } from '../../interfaces/charts.interface';
 import { makeLinePlotItem } from '../../utils/containers-data-processing';
 import { GlobalContainers } from '../../interfaces/data.interface';
 import { fetchGlobalContainers } from '../../utils/api-fetch';
@@ -15,6 +15,7 @@ import { fetchGlobalContainers } from '../../utils/api-fetch';
 function Home() {
     const [realTimeStats, setRealTimeStats] = useState<GlobalContainers>();
     const [linePlotData, setLinePlotData] = useState<LinePlotData[]>([]);
+    const realTimeLimit = 10;
 
     /**
      * Init linePlotData
@@ -37,25 +38,43 @@ function Home() {
     }
 
     /**
+     * Shift all the elements of an Array one position to the left in order
+     * to delete the first element and make space for the new one
+     * @param array - Generic Array
+     */
+    function shiftArrayLeft<T>(array: T[]): T[] {
+        /* Delete the last item of the array by slicing it (0, n-1) */
+        array = array.slice(1, array.length);
+        return array;
+    }
+
+    /**
      * Update linePlotData
      */
     function updateLinePlotData() {
-        console.log("Update - Data: ", linePlotData);
         /* API call */
         const rtStatsRoute = apiConf.routes.find(route => route.name === 'GET-ALL-RT-CTN-STATS')?.route!;
         //fetchDataApi<GlobalContainers>(rtStatsRoute)
         fetchGlobalContainers('/api/monitor/stats')
             .then(data => {
                 if (data != undefined) {
-                    const updatedLinePlotData = linePlotData.map(plotData => {
+                    let updatedData = linePlotData.map(plotData => {
                         const plotTitle = plotData.title;
                         const kpiName = linePlotConf.find(plotConf => plotConf.title === plotTitle)?.kpiName!;
                         const dataItem = makeLinePlotItem(data, kpiName);
+
+                        if (plotData.data.length > realTimeLimit) {
+                            console.log(plotData.data.length);
+                            plotData.data = shiftArrayLeft<LinePlotItem>(plotData.data);
+                            console.log(plotData.data.length);
+                        }
+
                         if (dataItem != undefined)
                             plotData.data.push(dataItem)
+
                         return plotData;
                     });
-                    setLinePlotData(updatedLinePlotData);
+                    setLinePlotData(updatedData);
                 }
             });
     }
@@ -67,7 +86,7 @@ function Home() {
     useEffect(() => {
         const scheduledUpdate = setTimeout(() => {
             updateLinePlotData();
-        }, 3000);
+        }, 2000);
         return () => clearTimeout(scheduledUpdate);
     }, [linePlotData])
 
