@@ -5,13 +5,20 @@ export interface LinePlotProps {
   labels: string[];
 }
 
-export interface LinePlotItem {
+export interface ChartItem {
+  id?: number;
   value: number;
   label: string;
 }
 
 export interface LinePlotData {
   id: number;
-  data: LinePlotItem[];
+  data: ChartItem[];
   title: string;
+}
+
+export interface RatioPlotData {
+  id: number;
+  title: string;
+  data: ChartItem[];
 }

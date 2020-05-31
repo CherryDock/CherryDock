@@ -1,5 +1,5 @@
 import { GlobalContainers, Container } from "../interfaces/data.interface";
-import { LinePlotItem } from "../interfaces/charts.interface";
+import { ChartItem } from "../interfaces/charts.interface";
 
 /**
  * Get acquisition time with the following format
@@ -18,10 +18,10 @@ function makeAcqTime(): string {
  * Get real-time data of a specific KPI from the Global Containers Data
  * @param fetchedData
  */
-function makeGlobalCtnItem(
+function makeGlobalCtnLineItem(
   fetchedData: GlobalContainers,
   kpiName: string
-): LinePlotItem | undefined {
+): ChartItem | undefined {
   const kpi = fetchedData.GlobalInfo.find(kpi => kpi.name === kpiName);
   if (kpi !== undefined) {
     //const value = Number(kpi.value.toFixed(2));
@@ -36,10 +36,10 @@ function makeGlobalCtnItem(
  * Get real-time data of a specific KPI from the single Container Data
  * @param fetchedData
  */
-function makeSingleCtnItem(
+function makeSingleCtnLineItem(
   fetchedData: Container,
   kpiName: string
-): LinePlotItem | undefined {
+): ChartItem | undefined {
   const kpi = fetchedData.Info.find(kpi => kpi.name === kpiName);
   if (kpi !== undefined) {
     let value = 50 + Math.random() * 3;
@@ -49,5 +49,29 @@ function makeSingleCtnItem(
   } else return undefined;
 }
 
-export { makeGlobalCtnItem, makeSingleCtnItem };
+/**
+ * Get real-time data of a specific KPI from the Global Containers Data
+ * @param fetchedData
+ */
+function makeGlobalCtnRatioItem(
+  fetchedData: GlobalContainers,
+  cntId: string,
+  kpiName: string,
+  addId: boolean
+): ChartItem | undefined {
+
+  const kpi = fetchedData.Containers
+    .find(cnt => cnt.Id === cntId)!
+    .Info.find(_kpi => _kpi.name === kpiName);
+
+  if (kpi !== undefined) {
+    //const value = Number(kpi.value.toFixed(2));
+    let value = 50 + Math.random() * 3;
+    value = Number(value.toFixed(2));
+    const label = cntId;
+    return { value, label };
+  } else return undefined;
+}
+
+export { makeGlobalCtnLineItem, makeSingleCtnLineItem, makeGlobalCtnRatioItem };
 

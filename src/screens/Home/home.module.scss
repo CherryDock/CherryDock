@@ -19,13 +19,7 @@ $primary-text-color: #3e423f;
 
     .ratioStats {
       margin-top: 3rem;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .plot {
-        flex: 0 0 32%;
-        margin-bottom: 0rem;
-      }
+      
     }
   }
 }

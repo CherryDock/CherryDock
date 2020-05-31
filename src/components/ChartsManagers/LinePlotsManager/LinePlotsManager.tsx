@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import style from './line-plots-manager.module.scss';
 import LinePlot from '../../Charts/LinePlot/LinePlot';
-import apiConf from '../../../conf/api.conf';
 import { linePlotConf } from '../../../conf/charts.conf';
-import { LinePlotData, LinePlotItem } from '../../../interfaces/charts.interface';
-import { GlobalContainers, Container } from '../../../interfaces/data.interface';
-import { SingleOrAllCnts } from '../../../types/data.types';
+import { LinePlotData, ChartItem } from '../../../interfaces/charts.interface';
 
 interface LinePlotsManagerProps<T> {
     realTimeLimit: number;
     fetchData: () => Promise<T>;
-    makePlotItem: (data: T, kpiName: string) => LinePlotItem | undefined;
+    makePlotItem: (data: T, kpiName: string) => ChartItem | undefined;
 }
 
 function LinePlotsManager<T extends object>({ realTimeLimit, fetchData, makePlotItem }: LinePlotsManagerProps<T>) {
@@ -60,11 +57,11 @@ function LinePlotsManager<T extends object>({ realTimeLimit, fetchData, makePlot
                 if (data != undefined) {
                     let updatedData = linePlotData.map(plotData => {
                         const plotTitle = plotData.title;
-                        const kpiName = linePlotConf.find(plotConf => plotConf.title === plotTitle) ?.kpiName!;
+                        const kpiName = linePlotConf.find(plotConf => plotConf.title === plotTitle)!.kpiName;
                         const dataItem = makePlotItem(data, kpiName);
 
                         if (plotData.data.length > realTimeLimit) {
-                            plotData.data = shiftArrayLeft<LinePlotItem>(plotData.data);
+                            plotData.data = shiftArrayLeft<ChartItem>(plotData.data);
                         }
 
                         if (dataItem != undefined)
