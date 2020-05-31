@@ -11,7 +11,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func getStats(containerId string) ContainerStats {
+func getStats(containerID string) MonitoringStats {
 	cli, err := client.NewEnvClient()
 
 	if err != nil {
@@ -19,7 +19,7 @@ func getStats(containerId string) ContainerStats {
 	}
 
 	// Retrieve all statistics
-	containerStats, err := cli.ContainerStats(context.Background(), containerId, false)
+	containerStats, err := cli.ContainerStats(context.Background(), containerID, false)
 	containerStatsBody, err := ioutil.ReadAll(containerStats.Body)
 
 	// Parse json to struct
@@ -30,14 +30,14 @@ func getStats(containerId string) ContainerStats {
 	memoryInfo := getMemoryInfo(stats)
 	networkInfo := networkStats(stats)
 
-	stt := ContainerStats{cpuInfo, memoryInfo, networkInfo}
+	stt := MonitoringStats{cpuInfo, memoryInfo, networkInfo}
 
 	return stt
 }
 
-func SingleMonitoring(containerId string) []byte {
+func SingleMonitoring(containerID string) []byte {
 
-	stats := getStats(containerId)
+	stats := getStats(containerID)
 
 	// Extract memory info
 	memoryPercent := stats.MemoryInfo.UtilizationPercent
@@ -52,7 +52,7 @@ func SingleMonitoring(containerId string) []byte {
 	// Extract Cpu percentage of use
 	cpuPercent := stats.CpuInfo.CpuPercent
 
-	Info := ContainerInfo{
+	Info := Info{
 		{"CpuUsage", cpuPercent, string("%")},
 		{"MemoryUsage", memoryPercent, string("%")},
 		{"Memory", memoryValue, memoryUnit},
@@ -60,21 +60,21 @@ func SingleMonitoring(containerId string) []byte {
 		{"NetworkInfoOut", networkOut, networkOutUnit},
 	}
 
-	return json_utils.FormatToJson(ContainerStat{containerId, Info})
+	return json_utils.FormatToJson(ContainerStat{containerID, Info})
 }
 
 func GlobalMonitoring() *GlobalStats {
 	// Extract running containers id
 	runningContainers := ContainersId(false)
 
-	var containerInfo []Container
+	var containersStat []ContainerStat
+	var globalInfo Info
 	var nbRunningContainers = len(runningContainers)
 	var globalMemoryUsage = 0.0
-	var globalCpuUsage = 0.0
+	var globalCPUUsage = 0.0
 	var memoryLimit float64
 	var memoryUnit string
-
-	var nbCpu int
+	var nbCPU int
 
 	var wg sync.WaitGroup
 	wg.Add(nbRunningContainers)
@@ -83,8 +83,8 @@ func GlobalMonitoring() *GlobalStats {
 	for i := 0; i < nbRunningContainers; i++ {
 		go func(i int) {
 			defer wg.Done()
-			containerId := runningContainers[i]
-			stats := getStats(containerId)
+			containerID := runningContainers[i]
+			stats := getStats(containerID)
 
 			// Extract memory info
 			memoryLimit, memoryUnit = byteConversion(stats.MemoryInfo.Limit)
@@ -92,77 +92,63 @@ func GlobalMonitoring() *GlobalStats {
 			memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
 			globalMemoryUsage += memoryPercent
 
-			// Extract cpu info
-			nbCpu = stats.CpuInfo.NbCpu
-			cpuPercent := stats.CpuInfo.CpuPercent
-			globalCpuUsage += cpuPercent
+			// Extract network info
+			networkIn := stats.NetworkInfo.In.Value
+			networkInUnit := stats.NetworkInfo.In.Unit
+			networkOut := stats.NetworkInfo.Out.Value
+			networkOutUnit := stats.NetworkInfo.Out.Unit
 
-			containerInfo = append(containerInfo,
-				Container{
-					containerId,
+			// Extract cpu info
+			nbCPU = stats.CpuInfo.NbCpu
+			cpuPercent := stats.CpuInfo.CpuPercent
+			globalCPUUsage += cpuPercent
+
+			containersStat = append(containersStat,
+				ContainerStat{containerID,
 					Info{
-						cpuPercent,
-						memoryPercent,
-						Memory{
-							memoryValue,
-							memoryUnit},
-						stats.NetworkInfo,
+						{"CpuUsage", cpuPercent, string("%")},
+						{"MemoryUsage", memoryPercent, string("%")},
+						{"Memory", memoryValue, memoryUnit},
+						{"NetworkInfoIn", networkIn, networkInUnit},
+						{"NetworkInfoOut", networkOut, networkOutUnit},
 					}})
 		}(i)
 	}
 	wg.Wait()
 
-	globalStats := GlobalStats{
-		nbRunningContainers,
-		nbCpu,
-		Memory{memoryLimit, memoryUnit},
-		globalMemoryUsage,
-		globalCpuUsage,
-		containerInfo,
+	globalInfo = Info{
+		{"RunningContainers", float64(nbRunningContainers), ""},
+		{"NbCpu", float64(nbCPU), ""},
+		{"Memory", memoryLimit, memoryUnit},
+		{"MemoryUsage", globalMemoryUsage, string("%")},
+		{"CpuUsage", globalCPUUsage, string("%")},
 	}
 
+	globalStats := GlobalStats{
+		globalInfo,
+		containersStat,
+	}
 	return &globalStats
 }
 
-type ContainerStats struct {
+type MonitoringStats struct {
 	CpuInfo     CpuInfo
 	MemoryInfo  MemoryInfo
 	NetworkInfo NetworkInfo
 }
 
-type Info struct {
-	CpuUsagePercent    float64
-	MemoryUsagePercent float64
-	Memory             Memory
-	NetworkInfo        NetworkInfo
-}
-
-type Memory struct {
-	Value float64
-	Unit  string
-}
-
-type ContainerInfo []struct {
+type Info []struct {
 	Name  string  `json:"name"`
 	Value float64 `json:"value"`
 	Unit  string  `json:"unit"`
 }
 
 type ContainerStat struct {
-	Id   string        `json:"Id"`
-	Info ContainerInfo `json:"Info"`
-}
-
-type Container struct {
-	Id   string
-	Info Info
+	ID   string `json:"Id"`
+	Info Info   `json:"Info"`
 }
 
 type GlobalStats struct {
-	RunningContainers  int
-	NbCpu              int
-	MemoryLimit        Memory
-	MemoryUsagePercent float64
-	CpuUsagePercent    float64
-	Containers         []Container
+	Info       Info            `json:"GlobalInfo"`
+	Containers []ContainerStat `json:"Containers"`
 }
