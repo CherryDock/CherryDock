@@ -3,11 +3,12 @@ package monitoring
 import (
 	"context"
 	"encoding/json"
-	json_utils "github.com/CherryDock/CherryDock/api/jsonutils"
-	"github.com/docker/docker/client"
 	"io/ioutil"
 	"log"
 	"sync"
+
+	json_utils "github.com/CherryDock/CherryDock/api/jsonutils"
+	"github.com/docker/docker/client"
 )
 
 func getStats(containerId string) ContainerStats {
@@ -42,21 +43,24 @@ func SingleMonitoring(containerId string) []byte {
 	memoryPercent := stats.MemoryInfo.UtilizationPercent
 	memoryValue, memoryUnit := byteConversion(stats.MemoryInfo.MemoryUsage)
 
+	// Extract network info
+	networkIn := stats.NetworkInfo.In.Value
+	networkInUnit := stats.NetworkInfo.In.Unit
+	networkOut := stats.NetworkInfo.Out.Value
+	networkOutUnit := stats.NetworkInfo.Out.Unit
+
 	// Extract Cpu percentage of use
 	cpuPercent := stats.CpuInfo.CpuPercent
 
-	containerInfo := Container{
-		containerId,
-		Info{
-			cpuPercent,
-			memoryPercent,
-			Memory{
-				memoryValue,
-				memoryUnit},
-			stats.NetworkInfo,
-		}}
+	Info := ContainerInfo{
+		{"CpuUsage", cpuPercent, string("%")},
+		{"MemoryUsage", memoryPercent, string("%")},
+		{"Memory", memoryValue, memoryUnit},
+		{"NetworkInfoIn", networkIn, networkInUnit},
+		{"NetworkInfoOut", networkOut, networkOutUnit},
+	}
 
-	return json_utils.FormatToJson(containerInfo)
+	return json_utils.FormatToJson(ContainerStat{containerId, Info})
 }
 
 func GlobalMonitoring() *GlobalStats {
@@ -136,6 +140,17 @@ type Info struct {
 type Memory struct {
 	Value float64
 	Unit  string
+}
+
+type ContainerInfo []struct {
+	Name  string  `json:"name"`
+	Value float64 `json:"value"`
+	Unit  string  `json:"unit"`
+}
+
+type ContainerStat struct {
+	Id   string        `json:"Id"`
+	Info ContainerInfo `json:"Info"`
 }
 
 type Container struct {
