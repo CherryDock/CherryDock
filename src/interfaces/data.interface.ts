@@ -35,4 +35,5 @@ export interface ContainerInfo {
   Command: string;
   Created: number;
   Ports: Port[];
+  Selected?: boolean;
 }

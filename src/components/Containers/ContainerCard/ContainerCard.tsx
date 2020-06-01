@@ -4,13 +4,13 @@ import cx from 'classnames';
 import { useHistory } from "react-router-dom";
 
 interface ContainerCardProps {
-    id: number;
-    containerName: string;
+    id: string;
+    containerName: string[];
     containerState: string;
     imageName: string;
-    launchedDate: string;
+    launchedDate: number;
     selected: boolean;
-    toggleContainerFunc(id: number): void;
+    toggleContainerFunc(id: string): void;
 }
 
 function ContainerCard({
