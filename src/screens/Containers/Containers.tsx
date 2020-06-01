@@ -15,7 +15,7 @@ function Containers() {
             .then(res => {
                 const containersInfoWithId = res.map(ctn => {
                     return {
-                        ...ctn, selected: false
+                        ...ctn, Selected: false
                     }
                 })
                 setContainers(containersInfoWithId);
@@ -28,7 +28,7 @@ function Containers() {
             if (container.Id === id) {
                 return {
                     ...container,
-                    selected: !container.Selected
+                    Selected: !container.Selected
                 }
             }
             else
@@ -59,7 +59,7 @@ function Containers() {
             if (container.Selected === true) {
                 return {
                     ...container,
-                    selected: false
+                    Selected: false
                 }
             }
             else return container;
