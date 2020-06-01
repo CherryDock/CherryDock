@@ -39,6 +39,16 @@ function ContainerCard({
     const cardClass = selected ? [style.card, style.cardSelected] : [style.card];
 
     /**
+     * Format the status text
+     * @param status - Initial status text
+     */
+    function formatStatus(status: string) {
+        const statusSplit = status.split(' ');
+        const statusSplitClean = [statusSplit[0]].concat(statusSplit.slice(2));
+        return statusSplitClean.join(' ');
+    }
+
+    /**
      * Get the class name of the state label of the card
      */
     function getStateClass(): string[] {
@@ -65,7 +75,7 @@ function ContainerCard({
         >
             <div className={style.header}>
                 <span className={style.containerName}>{containerName}</span>
-                <span className={cx(getStateClass())}>{containerState}</span>
+                <span className={cx(getStateClass())}>{formatStatus(containerState)}</span>
             </div>
 
             <div className={style.imageName}>
