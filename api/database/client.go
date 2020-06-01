@@ -11,23 +11,25 @@ import (
 
 var DbClient BoltDb
 
-// Client interface
+// BoltDb Client interface
 type BoltDb interface {
 	Init()
-	RetrieveData() *[]Data
+	RetrieveData() *[]DataMonitoring
 	AddMonitoringInfo(info *monitoring.GlobalStats) error
 }
 
-// Client is
+// Client bolt db
 type Client struct {
 	boltDb *bolt.DB
 }
 
-type Data struct {
-	Date  *time.Time
-	Stats monitoring.GlobalStats
+// DataMonitoring is the format of data stored in db
+type DataMonitoring struct {
+	Date *time.Time
+	monitoring.GlobalStats
 }
 
+// Init bolt db, create buckets if not exists
 func (client *Client) Init() {
 	var err error
 	client.boltDb, err = bolt.Open("cherrydock.db", 384, nil)
@@ -55,6 +57,7 @@ func (client *Client) Init() {
 	log.Println("database successfully initialized")
 }
 
+// AddMonitoringInfo insert monitoring data into database
 func (client *Client) AddMonitoringInfo(info *monitoring.GlobalStats) error {
 	date := time.Now()
 	encodedInfo, err := json.Marshal(info)
@@ -72,8 +75,9 @@ func (client *Client) AddMonitoringInfo(info *monitoring.GlobalStats) error {
 	return err
 }
 
-func (client *Client) RetrieveData() *[]Data {
-	var databaseContent []Data
+// RetrieveData return all data from monitoring bucket
+func (client *Client) RetrieveData() *[]DataMonitoring {
+	var databaseContent []DataMonitoring
 	var data monitoring.GlobalStats
 	var date time.Time
 
@@ -84,7 +88,7 @@ func (client *Client) RetrieveData() *[]Data {
 			date, _ = time.Parse(time.RFC3339, string(k))
 			// Unmarshal containers info
 			json.Unmarshal(v, &data)
-			databaseContent = append(databaseContent, Data{&date, data})
+			databaseContent = append(databaseContent, DataMonitoring{&date, data})
 			return nil
 		})
 		return nil
