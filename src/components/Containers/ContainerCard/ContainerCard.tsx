@@ -2,15 +2,16 @@ import React from 'react';
 import style from './container-card.module.scss';
 import cx from 'classnames';
 import { useHistory } from "react-router-dom";
+import { timestampToDate } from '../../../utils/containers-info-processing';
 
 interface ContainerCardProps {
-    id: number;
-    containerName: string;
+    id: string;
+    containerName: string[];
     containerState: string;
     imageName: string;
-    launchedDate: string;
+    launchedDate: number;
     selected: boolean;
-    toggleContainerFunc(id: number): void;
+    toggleContainerFunc(id: string): void;
 }
 
 function ContainerCard({
@@ -25,6 +26,7 @@ function ContainerCard({
     let history = useHistory();
 
     function onCardClick() {
+        console.log(id);
         toggleContainerFunc(id);
     }
 
@@ -85,7 +87,7 @@ function ContainerCard({
                         <i className={cx("far fa-calendar-alt", style.icon)}></i>
                         <div className={style.dateValue}>
                             <span className={style.label}>Last launched</span>
-                            <span className={style.date}>{launchedDate}</span>
+                            <span className={style.date}>{timestampToDate(launchedDate)}</span>
                         </div>
                     </div>
                 </div>

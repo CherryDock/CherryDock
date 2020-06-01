@@ -4,6 +4,7 @@ import {
   GlobalContainers,
   HistGlobalContainers,
   Container,
+  ContainerInfo,
 } from "../interfaces/data.interface";
 import { SingleOrAllCnts } from "../types/data.types";
 
@@ -35,12 +36,11 @@ async function fetchDataApi<T>(apiRoute: string): Promise<T | null> {
   }
 }
 
-
 /**
  * Dummy data simulating fetching the API
  * @param jsonName - Name of the json file
  */
-async function fetchGlobalContainers(): Promise<GlobalContainers>{
+async function fetchGlobalContainers(): Promise<GlobalContainers> {
   return globalContainersData;
 }
 
@@ -52,5 +52,17 @@ async function fetchSingleContainer(): Promise<Container> {
   return containerData;
 }
 
+/**
+ * Dummy data simulating fetching the API
+ * @param jsonName - Name of the json file
+ */
+async function fetchContainersInfo(): Promise<ContainerInfo[]> {
+  return containersInfo;
+}
 
-export { fetchDataApi, fetchGlobalContainers, fetchSingleContainer };
+export {
+  fetchDataApi,
+  fetchGlobalContainers,
+  fetchSingleContainer,
+  fetchContainersInfo,
+};

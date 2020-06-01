@@ -2,41 +2,33 @@ import React, { useState, useEffect } from 'react';
 import ActionButtons from '../../components/Containers/ActionButtons/ActionButtons';
 import style from './containers.module.scss';
 import ContainerCard from '../../components/Containers/ContainerCard/ContainerCard';
-import containerData from './data';
 import SelectedContainers from '../../components/Containers/SelectedContainers/SelectedContainers';
-
-interface Container {
-    id: number;
-    containerName: string;
-    containerState: string;
-    imageName: string;
-    launchedDate: string;
-    selected: boolean;
-}
+import { fetchContainersInfo } from '../../utils/api-fetch';
+import { ContainerInfo } from '../../interfaces/data.interface';
 
 function Containers() {
 
-    const [containers, setContainers] = useState<Container[]>([])
-
-    async function getContainersData() {
-        const data: Container[] = containerData;
-        return data;
-    }
+    const [containers, setContainers] = useState<ContainerInfo[]>([])
 
     useEffect(() => {
-        getContainersData()
+        fetchContainersInfo()
             .then(res => {
-                setContainers(res);
+                const containersInfoWithId = res.map(ctn => {
+                    return {
+                        ...ctn, Selected: false
+                    }
+                })
+                setContainers(containersInfoWithId);
             });
 
     }, [])
 
-    function toggleContainer(id: number) {
+    function toggleContainer(id: string) {
         const updatedContainers = containers.map(container => {
-            if (container.id === id) {
+            if (container.Id === id) {
                 return {
                     ...container,
-                    selected: !container.selected
+                    Selected: !container.Selected
                 }
             }
             else
@@ -47,15 +39,15 @@ function Containers() {
 
     const displayContainers = containers.map(container => {
         return (
-            <div key={container.id} className={style.containerCard}>
+            <div key={container.Id} className={style.containerCard}>
                 <ContainerCard
-                    key={container.id}
-                    id={container.id}
-                    containerName={container.containerName}
-                    containerState={container.containerState}
-                    imageName={container.imageName}
-                    launchedDate={container.launchedDate}
-                    selected={container.selected}
+                    key={container.Id}
+                    id={container.Id}
+                    containerName={container.Name}
+                    containerState={container.Status}
+                    imageName={container.Image}
+                    launchedDate={container.Created}
+                    selected={container.Selected!}
                     toggleContainerFunc={toggleContainer}
                 />
             </div>
@@ -64,10 +56,10 @@ function Containers() {
 
     function resetContainerSelection() {
         const containersWithSelectionReset = containers.map(container => {
-            if (container.selected === true) {
+            if (container.Selected === true) {
                 return {
                     ...container,
-                    selected: false
+                    Selected: false
                 }
             }
             else return container;
@@ -76,7 +68,7 @@ function Containers() {
     }
 
     function displaySelectedContainers() {
-        const numSelectedContainers = containers.map(container => container.selected)
+        const numSelectedContainers = containers.map(container => container.Selected)
             .filter(isSelected => isSelected === true)
             .length
         if (numSelectedContainers > 0) {
