@@ -1,5 +1,6 @@
-/go.sum
+/api/go.sum
 /.idea
+/api/cherrydock.db
 
 # dependencies
 /node_modules
