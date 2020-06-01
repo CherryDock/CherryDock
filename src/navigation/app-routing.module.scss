@@ -1,5 +1,4 @@
 .layout {
-  
 }
 
 .sidebar {
@@ -15,4 +14,8 @@
 .appScreen {
   margin-left: 15%;
   height: 100vh;
+
+  @media only screen and (max-width: 1024px) {
+    margin-left: 20.5%;
+  }
 }

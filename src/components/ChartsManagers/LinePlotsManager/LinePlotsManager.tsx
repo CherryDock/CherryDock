@@ -90,7 +90,7 @@ function LinePlotsManager<T extends object>({ realTimeLimit, fetchData, makePlot
         return (
             <div key={kpi.id} className={style.plot}>
                 <LinePlot
-                    heightScreenRatio={0.45}
+                    heightScreenRatio={0.40}
                     title={kpi.title}
                     data={kpi.data.map(item => item.value)}
                     labels={kpi.data.map(item => item.label)} />

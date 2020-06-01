@@ -9,10 +9,17 @@ $primary-text-color: #f2f3f5;
   .brand {
     display: flex;
     background-color: $sidebar-background-color;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
     
     .brandImg {
-      width: 3rem;
+      height: 90%;
       margin-left: .5rem;
+
+      @media only screen and (max-width: 650px) {
+       margin-right: .5rem;
+      }
     }
 
     .appName {
@@ -20,13 +27,14 @@ $primary-text-color: #f2f3f5;
       width: 100%;
       color: $primary-text-color;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       height: 3rem;
       line-height: 3rem;
       margin-left: 1rem;
+      font-family: 'Lobster', cursive;
 
       @media only screen and (max-width: 650px) {
-        font-size: 0.7rem;
+        display: none;
       }
     }
   }
