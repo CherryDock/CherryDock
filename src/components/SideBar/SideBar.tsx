@@ -4,9 +4,13 @@ import cx from 'classnames';
 import { Link } from "react-router-dom";
 
 const SideBar = () => {
+    const brandLogo = require('../../assets/img/brand-image.png');
     return (
         <div className={style.container}>
-            <span className={style.appName}>Cherry Doc</span>
+            <div className={style.brand}>
+                <img className={style.brandImg} src={brandLogo} alt=""/>
+                <span className={style.appName}>Cherry Doc</span>
+            </div>
             <nav>
                 <ul className={style.links}>
                     <li className={style.link}>

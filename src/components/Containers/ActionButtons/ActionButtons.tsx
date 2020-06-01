@@ -14,7 +14,7 @@ function ActionButtons() {
     
     const displayButtons = buttonsConf.map((button: ButtonConf) => {
         return (
-            <button key={button.id} className={cx(style.actionButton, style[button.style])}>
+            <button key={button.id} className={cx(style.actionButton)}>
                 <i className={cx(button.icon, style.buttonIcon)}></i>
                 <span className={style.buttonLabel}>{button.label}</span>
             </button>
