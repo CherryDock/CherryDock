@@ -3,6 +3,7 @@ package database
 import (
 	"encoding/json"
 	"log"
+	"strings"
 	"time"
 
 	"github.com/CherryDock/CherryDock/api/docker/monitoring"
@@ -15,6 +16,7 @@ var DbClient BoltDb
 type BoltDb interface {
 	Init()
 	RetrieveData() *[]DataMonitoring
+	RetrieveDataSingle(containerdID string, nbSample int) *[]DataSingleMonitoring
 	AddMonitoringInfo(info *monitoring.GlobalStats) error
 }
 
@@ -23,10 +25,15 @@ type Client struct {
 	boltDb *bolt.DB
 }
 
-// DataMonitoring is the format of data stored in db
+// DataMonitoring is the format of data stgiored in db
 type DataMonitoring struct {
 	Date *time.Time
 	monitoring.GlobalStats
+}
+
+type DataSingleMonitoring struct {
+	Date *time.Time
+	monitoring.Info
 }
 
 // Init bolt db, create buckets if not exists
@@ -91,6 +98,32 @@ func (client *Client) RetrieveData() *[]DataMonitoring {
 			databaseContent = append(databaseContent, DataMonitoring{&date, data})
 			return nil
 		})
+		return nil
+	})
+	return &databaseContent
+}
+
+// RetrieveDataSingle return container n last info stored in bolt
+func (client *Client) RetrieveDataSingle(containerID string, nbSample int) *[]DataSingleMonitoring {
+	var databaseContent []DataSingleMonitoring
+	var globalStats monitoring.GlobalStats
+	var date time.Time
+
+	client.boltDb.View(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("DB")).Bucket([]byte("MONITORING"))
+		cursor := b.Cursor()
+		i := 0
+		for k, v := cursor.Last(); i != nbSample; k, v = cursor.Prev() {
+			date, _ = time.Parse(time.RFC3339, string(k))
+			json.Unmarshal(v, &globalStats)
+			for _, container := range globalStats.Containers {
+
+				if strings.Contains(containerID, container.ID) {
+					i++
+					databaseContent = append(databaseContent, DataSingleMonitoring{&date, container.Info})
+				}
+			}
+		}
 		return nil
 	})
 	return &databaseContent
