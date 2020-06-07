@@ -1,11 +1,13 @@
 package endpoints
 
 import (
+	"net/http"
+	"strconv"
+
 	"github.com/CherryDock/CherryDock/api/database"
 	"github.com/CherryDock/CherryDock/api/docker/actions"
 	"github.com/CherryDock/CherryDock/api/docker/monitoring"
 	"github.com/CherryDock/CherryDock/api/jsonutils"
-	"net/http"
 )
 
 func handleSingleAction(w http.ResponseWriter, r *http.Request, singleAction actions.Action) {
@@ -102,4 +104,19 @@ func historicDataHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("content-type", "application/json")
 	data := database.DbClient.RetrieveData()
 	w.Write(jsonutils.FormatToJson(&data))
+}
+
+func historicDataSingleHandler(w http.ResponseWriter, r *http.Request) {
+	containerdID := r.FormValue("id")
+	nbSample, err := strconv.Atoi(r.FormValue("n"))
+
+	if containerdID == "" {
+		http.Error(w, "Container id parameter is missing", http.StatusBadRequest)
+	} else if err != nil {
+		http.Error(w, "Bad parameter type, n must be an integer", http.StatusBadRequest)
+	} else {
+		w.Header().Set("content-type", "application/json")
+		data := database.DbClient.RetrieveDataSingle(containerdID, nbSample)
+		w.Write(jsonutils.FormatToJson(&data))
+	}
 }
