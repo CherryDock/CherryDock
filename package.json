@@ -18,7 +18,7 @@
     "chartjs-plugin-datalabels": "^0.7.0",
     "chartjs-plugin-labels": "^1.1.0",
     "classnames": "^2.2.6",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.13.1",
